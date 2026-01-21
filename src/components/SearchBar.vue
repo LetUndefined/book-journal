@@ -1,14 +1,34 @@
 <script setup lang="ts">
 import { useBookStore } from '@/stores/BookLogic'
+import { storeToRefs } from 'pinia'
 
 const bookStore = useBookStore()
 const { filters } = bookStore
+const { inputValue } = storeToRefs(bookStore)
+const { fetchSelectedBook } = bookStore
+
+const getSelectedBook = (value: string) => {
+  inputValue.value = ''
+  fetchSelectedBook(value.toString())
+}
 </script>
 
 <template>
   <div class="search-bar-container">
     <div class="search-bar-input-wrapper">
-      <input type="text" class="search-bar__input" placeholder="Search books..." />
+      <input
+        type="text"
+        class="search-bar-input"
+        placeholder="Search books..."
+        v-model="inputValue"
+      />
+      <input
+        type="button"
+        class="btn"
+        value="Search"
+        placeholder="Search"
+        @click="getSelectedBook(inputValue)"
+      />
     </div>
     <div class="search-bar-filters">
       <button class="search-bar-filter search-bar-filter--active">All</button>
@@ -45,7 +65,21 @@ const { filters } = bookStore
   flex-shrink: 0;
 }
 
-.search-bar__input {
+.btn {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 100px;
+  background: var(--color-card-bg);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.search-bar-input {
   flex: 1;
   border: none;
   background: transparent;
