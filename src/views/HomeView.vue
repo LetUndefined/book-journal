@@ -10,11 +10,14 @@ import { storeToRefs } from 'pinia'
 import NoBooksFound from '@/components/NoBooksFound.vue'
 import BookModal from '@/components/BookModal.vue'
 import { modalTrigger } from '@/composables/modal'
+import { useSupaStore } from '@/stores/SupaBase'
 
 const bookStore = useBookStore()
 const { isLoading } = storeToRefs(bookStore)
 const { noBook } = storeToRefs(bookStore)
-const {selectedBook} = storeToRefs(bookStore)
+
+const supaStore = useSupaStore()
+const {selectedBook} = storeToRefs(supaStore)
 
 
 </script>

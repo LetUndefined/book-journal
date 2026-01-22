@@ -1,13 +1,16 @@
 <script setup lang="ts">
+import type { Book } from '@/models/Interface';
+
 const props = defineProps<{
+  book_id?: string
   status: string
   title: string
-  author: string
+  author?: string
   cover?: string
 }>()
 
 const emit = defineEmits<{
-  (e: 'save-book', book: object): void
+  (e: 'save-book', book: Book): void
 }>()
 
 </script>

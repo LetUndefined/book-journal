@@ -2,13 +2,27 @@
 import { useBookStore } from '@/stores/BookLogic'
 import BookCard from './BookCard.vue'
 import { storeToRefs } from 'pinia'
+import { modalTrigger } from '@/composables/modal'
+import type { Book } from '@/models/Interface'
+import { useSupaStore } from '@/stores/SupaBase'
+
+
+
+
+
 const bookStore = useBookStore()
 const { books } = storeToRefs(bookStore)
 
+const supaStore = useSupaStore()
+const {selectedBook} = storeToRefs(supaStore)
 
 
-function handleSaveBook(book: object){
-console.log('Book clicked: ', book)
+
+function handleSaveBook(book: Book){
+    selectedBook.value = book
+
+  modalTrigger.value = true
+  console.log('Book clicked: ', book)
 }
 
 </script>
@@ -25,7 +39,8 @@ console.log('Book clicked: ', book)
       :author="book.author"
       :title="book.title"
       :status="book.status"
-      :image="book.cover"
+      :cover="book.cover"
+      :book_id="book.book_id"
       @save-book="handleSaveBook"
     />
   </div>

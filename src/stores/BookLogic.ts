@@ -1,4 +1,4 @@
-import type { Book, BookDetails, Doc, OpenlibraryResults } from '@/models/Interface'
+import type { Book, Doc } from '@/models/Interface'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
@@ -10,7 +10,6 @@ export const useBookStore = defineStore('books', () => {
   const books: Ref<Book[]> = ref([])
   const isLoading = ref(false)
   const noBook = ref(false)
-  const selectedBook: Ref<Book | null> = ref(null)
 
 
 
@@ -41,6 +40,7 @@ export const useBookStore = defineStore('books', () => {
       .filter((e: Doc) => e.author_name && e.author_name.length > 0)
       .map((e: Doc) => {
         const book: Book = {
+          book_id: e.key,
           status: 'Reading',
           author:  e.author_name && e.author_name.length > 0 ? e.author_name[0] : 'unknown author' ,
           title: e.title,
@@ -52,5 +52,5 @@ export const useBookStore = defineStore('books', () => {
       })
   }
 
-  return {  filters, books, inputValue, fetchSelectedBook, isLoading, noBook, selectedBook }
+  return {  filters, books, inputValue, fetchSelectedBook, isLoading, noBook }
 })
