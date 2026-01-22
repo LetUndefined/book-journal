@@ -3,14 +3,19 @@ const props = defineProps<{
   status: string
   title: string
   author: string
-  image?: string
+  cover?: string
 }>()
+
+const emit = defineEmits<{
+  (e: 'save-book', book: object): void
+}>()
+
 </script>
 
 <template>
-  <div class="book-card">
+  <div class="book-card" @click="emit('save-book', props)">
     <div class="book-card__cover">
-      <img :src="props.image" alt="" class="cover-image" />
+      <img :src="props.cover" alt="" class="cover-image" />
       <div class="book-card__badge">{{ props.status }}</div>
     </div>
 

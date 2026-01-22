@@ -1,35 +1,24 @@
-import type { Book, BookDetails } from '@/models/Interface'
+import type { Book, BookDetails, Doc, OpenlibraryResults } from '@/models/Interface'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
+
 
 export const useBookStore = defineStore('books', () => {
   const inputValue = ref('')
   const filters = ['Reading', 'Completed', 'Thriller', 'Sci-Fi']
-  const url = 'https://openlibrary.org/search.json?q=subject:'
+  // const url = 'https://openlibrary.org/search.json?q=subject:'
   const books: Ref<Book[]> = ref([])
-  const isLoading = ref(true)
+  const isLoading = ref(false)
   const noBook = ref(false)
+  const selectedBook: Ref<Book | null> = ref(null)
 
-  const fetchBooks = async () => {
-    isLoading.value = true
 
-    try {
-      const response = await fetch(`${url}dark_romance&limit=20`)
-      const data = await response.json()
-
-      const list = data.docs
-      transformData(list)
-    } catch (error) {
-      console.error('Error fetching data ' + error)
-    }
-    isLoading.value = false
-  }
 
   const fetchSelectedBook = async (inputValue: string) => {
     noBook.value = false
     isLoading.value = true
     try {
-      const response = await fetch(`https://openlibrary.org/search.json?q=${inputValue}`)
+      const response = await fetch(`https://openlibrary.org/search.json?q=${inputValue}&limit=20`)
       const data = await response.json()
 
       if (data.docs && data.docs.length > 0) {
@@ -47,13 +36,13 @@ export const useBookStore = defineStore('books', () => {
     }
   }
 
-  function transformData(data: any) {
+  function transformData(data: Doc[]) {
     books.value = data
-      .filter((e: BookDetails) => e.author_name && e.author_name.length > 0)
-      .map((e: BookDetails) => {
-        const book = {
+      .filter((e: Doc) => e.author_name && e.author_name.length > 0)
+      .map((e: Doc) => {
+        const book: Book = {
           status: 'Reading',
-          author: e.author_name[0],
+          author:  e.author_name && e.author_name.length > 0 ? e.author_name[0] : 'unknown author' ,
           title: e.title,
           cover: e.cover_edition_key
             ? `https://covers.openlibrary.org/b/olid/${e.cover_edition_key}-M.jpg`
@@ -63,5 +52,5 @@ export const useBookStore = defineStore('books', () => {
       })
   }
 
-  return { fetchBooks, filters, books, inputValue, fetchSelectedBook, isLoading, noBook }
+  return {  filters, books, inputValue, fetchSelectedBook, isLoading, noBook, selectedBook }
 })

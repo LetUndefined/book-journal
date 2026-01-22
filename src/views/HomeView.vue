@@ -1,43 +1,59 @@
 <script setup lang="ts">
-import Header from '@/components/Header.vue'
+import NavHeader from '@/components/NavHeader.vue'
 import SearchBar from '@/components/SearchBar.vue'
 import BookList from '@/components/BookList.vue'
 import Footer from '@/components/BookFooter.vue'
 import { useBookStore } from '@/stores/BookLogic'
-import { onMounted } from 'vue'
+
 import IsLoading from '@/components/IsLoading.vue'
 import { storeToRefs } from 'pinia'
 import NoBooksFound from '@/components/NoBooksFound.vue'
+import BookModal from '@/components/BookModal.vue'
+import { modalTrigger } from '@/composables/modal'
 
 const bookStore = useBookStore()
-const { fetchBooks } = bookStore
 const { isLoading } = storeToRefs(bookStore)
 const { noBook } = storeToRefs(bookStore)
+const {selectedBook} = storeToRefs(bookStore)
 
-onMounted(async () => {
-  await fetchBooks()
-  isLoading.value = false
-})
+
 </script>
 
 <template>
-  <div class="loading" v-if="isLoading">
-    <IsLoading />
-  </div>
-  <div class="home">
-    <Header />
-    <SearchBar />
-    <section class="book-list">
-      <NoBooksFound v-if="noBook" />
+  <div class="container">
+    <div class="book-modal">
+      <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook"/>
+    </div>
 
-      <BookList />
-    </section>
+    <div class="loading" v-if="isLoading">
+      <IsLoading />
+    </div>
 
-    <Footer />
+    <div class="home">
+
+      <NavHeader />
+      <SearchBar />
+      <section class="book-list">
+        <NoBooksFound v-if="noBook" />
+
+        <BookList />
+      </section>
+
+      <Footer />
+    </div>
   </div>
 </template>
 
 <style scoped>
+
+.container{
+  position: relative;
+}
+
+.book-modal{
+  position: absolute;
+  z-index: 9999;
+}
 .home {
   height: 100vh;
   display: flex;
@@ -49,6 +65,7 @@ onMounted(async () => {
   flex: 1;
   padding: 0 1rem 2rem;
   overflow-y: auto;
+  position: relative;
 }
 
 .loading {

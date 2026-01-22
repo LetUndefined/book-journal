@@ -4,6 +4,13 @@ import BookCard from './BookCard.vue'
 import { storeToRefs } from 'pinia'
 const bookStore = useBookStore()
 const { books } = storeToRefs(bookStore)
+
+
+
+function handleSaveBook(book: object){
+console.log('Book clicked: ', book)
+}
+
 </script>
 
 <template>
@@ -19,6 +26,7 @@ const { books } = storeToRefs(bookStore)
       :title="book.title"
       :status="book.status"
       :image="book.cover"
+      @save-book="handleSaveBook"
     />
   </div>
 </template>

@@ -1,4 +1,19 @@
 <script setup lang="ts">
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { useAuthStore } from '@/stores/Auth';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+
+const authStore = useAuthStore()
+const {signOut} = authStore
+
+
+async function handleSignOut(){
+  await signOut()
+  router.push({name: 'login'})
+}
+
 </script>
 
 <template>
@@ -6,23 +21,12 @@
     <div class="header__container">
       <div class="header__brand">
         <div class="header__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-          </svg>
+          <font-awesome-icon icon="book-open" />
         </div>
         <h1 class="header__title">Book Journal</h1>
       </div>
-      <div class="header__actions">
-        <button class="header__btn" aria-label="Search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-          </svg>
-        </button>
-        <button class="header__btn header__btn--primary" aria-label="Add book">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
-        </button>
+      <div class="logout"  >
+        <font-awesome-icon :icon="faArrowRightFromBracket" @click="handleSignOut()"/>
       </div>
     </div>
   </header>
@@ -68,6 +72,10 @@
 .header__icon svg {
   width: 20px;
   height: 20px;
+}
+
+.header__icon .fa-icon {
+  font-size: 20px;
 }
 
 .header__title {
