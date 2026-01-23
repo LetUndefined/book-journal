@@ -3,15 +3,15 @@ import type { User } from '@supabase/supabase-js'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-
 export const useAuthStore = defineStore('authenticator', () => {
   const user = ref<User | null>(null)
   const loading = ref(true)
 
-
   // Check if someone is logged in
   async function initAuth() {
-    const { data: { session } } = await supabase.auth.getSession()
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
     user.value = session?.user ?? null
     loading.value = false
 
@@ -26,7 +26,6 @@ export const useAuthStore = defineStore('authenticator', () => {
     const { data, error } = await supabase.auth.signUp({ email, password })
     if (error) throw error
     return data
-    
   }
 
   // Login
@@ -49,10 +48,6 @@ export const useAuthStore = defineStore('authenticator', () => {
     initAuth,
     signUp,
     signIn,
-    signOut
+    signOut,
   }
 })
-
-
-
-

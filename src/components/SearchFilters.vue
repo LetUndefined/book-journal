@@ -1,24 +1,21 @@
 <script setup lang="ts">
-import { useBookStore } from '@/stores/BookLogic';
+import { useBookStore } from '@/stores/BookLogic'
 
 const bookStore = useBookStore()
 const { filters } = bookStore
-
 </script>
 
 <template>
   <div class="search-bar-filters">
-      <button class="search-bar-filter search-bar-filter--active">All</button>
-      <button class="search-bar-filter" v-for="(filter, index) in filters" :key="index">
-        {{ filter }}
-      </button>
-    </div>
+    <button class="search-bar-filter search-bar-filter--active">All</button>
+    <button class="search-bar-filter" v-for="(filter, index) in filters" :key="index">
+      {{ filter }}
+    </button>
+  </div>
 </template>
 
-
 <style scoped>
-
-  .search-bar-filters {
+.search-bar-filters {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
@@ -51,5 +48,4 @@ const { filters } = bookStore
   border-color: var(--color-primary);
   color: white;
 }
-
 </style>

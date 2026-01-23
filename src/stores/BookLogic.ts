@@ -2,7 +2,6 @@ import type { Book, Doc } from '@/models/Interface'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
-
 export const useBookStore = defineStore('books', () => {
   const inputValue = ref('')
   const filters = ['Reading', 'Completed', 'Thriller', 'Sci-Fi']
@@ -10,8 +9,6 @@ export const useBookStore = defineStore('books', () => {
   const books: Ref<Book[]> = ref([])
   const isLoading = ref(false)
   const noBook = ref(false)
-
-
 
   const fetchSelectedBook = async (inputValue: string) => {
     noBook.value = false
@@ -42,7 +39,7 @@ export const useBookStore = defineStore('books', () => {
         const book: Book = {
           book_id: e.key,
           status: 'Reading',
-          author:  e.author_name && e.author_name.length > 0 ? e.author_name[0] : 'unknown author' ,
+          author: e.author_name && e.author_name.length > 0 ? e.author_name[0] : 'unknown author',
           title: e.title,
           cover: e.cover_edition_key
             ? `https://covers.openlibrary.org/b/olid/${e.cover_edition_key}-M.jpg`
@@ -52,5 +49,5 @@ export const useBookStore = defineStore('books', () => {
       })
   }
 
-  return {  filters, books, inputValue, fetchSelectedBook, isLoading, noBook }
+  return { filters, books, inputValue, fetchSelectedBook, isLoading, noBook }
 })

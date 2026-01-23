@@ -14,22 +14,21 @@ import { onMounted } from 'vue'
 const bookStore = useBookStore()
 const { isLoading } = storeToRefs(bookStore)
 const { noBook } = storeToRefs(bookStore)
-const {books} = storeToRefs(bookStore)
+const { books } = storeToRefs(bookStore)
 
 const supaStore = useSupaStore()
-const {selectedBook} = storeToRefs(supaStore)
-const {fetchData} = supaStore
+const { selectedBook } = storeToRefs(supaStore)
+const { fetchData } = supaStore
 
-onMounted(async() => {
+onMounted(async () => {
   await fetchData()
 })
-
 </script>
 
 <template>
   <div class="container">
     <div class="book-modal">
-      <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook"/>
+      <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" />
     </div>
 
     <div class="loading" v-if="isLoading">
@@ -37,26 +36,21 @@ onMounted(async() => {
     </div>
 
     <div class="home">
-
       <SearchBar />
       <section class="book-list">
         <NoBooksFound v-if="noBook" />
-    <BookList :books="books" title="Search Results"/>
-
-
+        <BookList :books="books" title="Search Results" />
       </section>
-
     </div>
   </div>
 </template>
 
 <style scoped>
-
-.container{
+.container {
   position: relative;
 }
 
-.book-modal{
+.book-modal {
   position: absolute;
   z-index: 9999;
 }

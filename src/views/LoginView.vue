@@ -1,27 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useAuthStore } from '@/stores/Auth';
-import { useRouter } from 'vue-router';
-
+import { ref } from 'vue'
+import { useAuthStore } from '@/stores/Auth'
+import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
-const {signIn} = authStore
+const { signIn } = authStore
 const router = useRouter()
 
-  const email = ref('')
-  const password = ref('')
+const email = ref('')
+const password = ref('')
 
-async function handleSignIn(){
-  try{
+async function handleSignIn() {
+  try {
     await signIn(email.value, password.value)
-    router.push({name: 'home'})
-  } catch(error){
+    router.push({ name: 'home' })
+  } catch (error) {
     alert(error)
   }
 }
-
-
-
 </script>
 
 <template>
@@ -33,34 +29,22 @@ async function handleSignIn(){
       <form class="login-form" @submit.prevent="handleSignIn()">
         <div class="form-group">
           <label for="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="your@email.com"
-            required
-            v-model="email"
-          />
+          <input id="email" type="email" placeholder="your@email.com" required v-model="email" />
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="••••••••"
-            required
-            v-model="password"
-          />
+          <input id="password" type="password" placeholder="••••••••" required v-model="password" />
         </div>
 
-        <button type="submit" class="btn-primary" >Sign In</button>
+        <button type="submit" class="btn-primary">Sign In</button>
       </form>
 
       <div class="divider">
         <span>or</span>
       </div>
 
-      <button class="btn-secondary" @click="router.push({name: 'signUp'})">Create Account</button>
+      <button class="btn-secondary" @click="router.push({ name: 'signUp' })">Create Account</button>
     </div>
   </div>
 </template>

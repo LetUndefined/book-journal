@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { Book } from '@/models/Interface';
+import { emitTrigger } from '@/composables/EmitTrigger'
+import type { Book } from '@/models/Interface'
 
 const props = defineProps<{
-  book_id?: string
+  book_id: string
   status: string
   title: string
   author?: string
@@ -13,10 +14,16 @@ const emit = defineEmits<{
   (e: 'save-book', book: Book): void
 }>()
 
+const checkEmit = () => {
+  if (emitTrigger.value === true) {
+    emit('save-book', props)
+  }
+  emitTrigger.value = false
+}
 </script>
 
 <template>
-  <div class="book-card" @click="emit('save-book', props)">
+  <div class="book-card" @click="checkEmit">
     <div class="book-card__cover">
       <img :src="props.cover" alt="" class="cover-image" />
       <div class="book-card__badge">{{ props.status }}</div>

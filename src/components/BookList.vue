@@ -5,29 +5,22 @@ import { storeToRefs } from 'pinia'
 import { modalTrigger } from '@/composables/modal'
 import type { Book } from '@/models/Interface'
 import { useSupaStore } from '@/stores/SupaBase'
-
-
+import { emitTrigger } from '@/composables/EmitTrigger'
 
 defineProps<{
   books: Book[] | null
   title: string
 }>()
 
-
-
-
 const supaStore = useSupaStore()
-const {selectedBook} = storeToRefs(supaStore)
+const { selectedBook } = storeToRefs(supaStore)
 
-
-
-function handleSaveBook(book: Book){
-    selectedBook.value = book
+function handleSaveBook(book: Book) {
+  selectedBook.value = book
 
   modalTrigger.value = true
   console.log('Book clicked: ', book)
 }
-
 </script>
 
 <template>
@@ -45,6 +38,7 @@ function handleSaveBook(book: Book){
       :cover="book.cover"
       :book_id="book.book_id"
       @save-book="handleSaveBook"
+      @click.stop="emitTrigger = true"
     />
   </div>
 </template>

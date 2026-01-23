@@ -1,27 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useAuthStore } from '@/stores/Auth';
-import { useRouter } from 'vue-router';
-
+import { ref } from 'vue'
+import { useAuthStore } from '@/stores/Auth'
+import { useRouter } from 'vue-router'
 
 const authStore = useAuthStore()
-const {signUp} = authStore
+const { signUp } = authStore
 const router = useRouter()
 
-  const email = ref('')
-  const password = ref('')
+const email = ref('')
+const password = ref('')
 
-async function handleSignUp(){
-  try{
+async function handleSignUp() {
+  try {
     await signUp(email.value, password.value)
-    router.push({name: 'home'})
-  } catch(error){
+    router.push({ name: 'home' })
+  } catch (error) {
     alert(error)
   }
 }
-
-
-
 </script>
 
 <template>
@@ -33,29 +29,16 @@ async function handleSignUp(){
       <form class="signup-form" @submit.prevent="handleSignUp()">
         <div class="form-group">
           <label for="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="your@email.com"
-            required
-            v-model="email"
-          />
+          <input id="email" type="email" placeholder="your@email.com" required v-model="email" />
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="••••••••"
-            required
-            v-model="password"
-          />
+          <input id="password" type="password" placeholder="••••••••" required v-model="password" />
         </div>
 
-        <button type="submit" class="btn-primary" >Sign Up</button>
+        <button type="submit" class="btn-primary">Sign Up</button>
       </form>
-
     </div>
   </div>
 </template>

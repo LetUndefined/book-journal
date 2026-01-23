@@ -7,15 +7,15 @@
 }
 
 :root {
-  --color-primary: #2D4A3E;
-  --color-primary-light: #3D5F4F;
-  --color-secondary: #F8F5F0;
-  --color-accent: #C9A227;
-  --color-accent-light: #D4B545;
-  --color-text: #2C2C2C;
-  --color-text-muted: #6B6B6B;
-  --color-border: #E5E0D8;
-  --color-card-bg: #FFFFFF;
+  --color-primary: #2d4a3e;
+  --color-primary-light: #3d5f4f;
+  --color-secondary: #f8f5f0;
+  --color-accent: #c9a227;
+  --color-accent-light: #d4b545;
+  --color-text: #2c2c2c;
+  --color-text-muted: #6b6b6b;
+  --color-border: #e5e0d8;
+  --color-card-bg: #ffffff;
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Outfit', -apple-system, sans-serif;
@@ -75,6 +75,8 @@ img {
   height: auto;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   font-size: 16px; /* Prevents iOS zoom */
 }

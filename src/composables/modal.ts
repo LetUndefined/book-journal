@@ -1,3 +1,3 @@
-import { ref } from "vue";
+import { ref } from 'vue'
 
-export const modalTrigger = ref(false)
+export const modalTrigger = ref(true)

@@ -1,19 +1,17 @@
 <script setup lang="ts">
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
-import { useAuthStore } from '@/stores/Auth';
-import { useRouter } from 'vue-router';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { useAuthStore } from '@/stores/Auth'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 const authStore = useAuthStore()
-const {signOut} = authStore
+const { signOut } = authStore
 
-
-async function handleSignOut(){
+async function handleSignOut() {
   await signOut()
-  router.push({name: 'login'})
+  router.push({ name: 'login' })
 }
-
 </script>
 
 <template>
@@ -25,8 +23,8 @@ async function handleSignOut(){
         </div>
         <h1 class="header__title">Book Journal</h1>
       </div>
-      <div class="logout"  >
-        <font-awesome-icon :icon="faArrowRightFromBracket" @click="handleSignOut()"/>
+      <div class="logout">
+        <font-awesome-icon :icon="faArrowRightFromBracket" @click="handleSignOut()" />
       </div>
     </div>
   </header>

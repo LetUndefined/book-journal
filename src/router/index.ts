@@ -12,40 +12,44 @@ const router = createRouter({
       name: 'mainlayout',
       component: MainLayout,
       children: [
-    {
-      path: '',
-      name: 'home',
-      component: HomeView,
-    }, {
-      path: '/library',
-      name: 'library',
-      component: () => import('../views/LibraryView.vue')
-    }
-      ]
+        {
+          path: '',
+          name: 'home',
+          component: HomeView,
+        },
+        {
+          path: '/library',
+          name: 'library',
+          component: () => import('../views/LibraryView.vue'),
+        },
+      ],
     },
-     {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/LoginView.vue')
-    } , {
-    path: '/signup',
-    name: 'signUp',
-    component: () => import('../views/SignUpView.vue')
-    }
-
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue'),
+    },
+    {
+      path: '/signup',
+      name: 'signUp',
+      component: () => import('../views/SignUpView.vue'),
+    },
   ],
 })
-router.beforeEach(async(to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
-  if(authStore.loading) {
-    await new Promise(resolve => {
-      const unwatch = watch(() => authStore.loading, (isLoading) => {
-        if(!isLoading) {
-          unwatch()
-          resolve(true)
-        }
-      })
+  if (authStore.loading) {
+    await new Promise((resolve) => {
+      const unwatch = watch(
+        () => authStore.loading,
+        (isLoading) => {
+          if (!isLoading) {
+            unwatch()
+            resolve(true)
+          }
+        },
+      )
     })
   }
 
