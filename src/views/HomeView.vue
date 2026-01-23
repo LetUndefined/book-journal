@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import NavHeader from '@/components/NavHeader.vue'
 import SearchBar from '@/components/SearchBar.vue'
 import BookList from '@/components/BookList.vue'
-import Footer from '@/components/BookFooter.vue'
 import { useBookStore } from '@/stores/BookLogic'
 
 import IsLoading from '@/components/IsLoading.vue'
@@ -11,14 +9,20 @@ import NoBooksFound from '@/components/NoBooksFound.vue'
 import BookModal from '@/components/BookModal.vue'
 import { modalTrigger } from '@/composables/modal'
 import { useSupaStore } from '@/stores/SupaBase'
+import { onMounted } from 'vue'
 
 const bookStore = useBookStore()
 const { isLoading } = storeToRefs(bookStore)
 const { noBook } = storeToRefs(bookStore)
+const {books} = storeToRefs(bookStore)
 
 const supaStore = useSupaStore()
 const {selectedBook} = storeToRefs(supaStore)
+const {fetchData} = supaStore
 
+onMounted(async() => {
+  await fetchData()
+})
 
 </script>
 
@@ -34,15 +38,14 @@ const {selectedBook} = storeToRefs(supaStore)
 
     <div class="home">
 
-      <NavHeader />
       <SearchBar />
       <section class="book-list">
         <NoBooksFound v-if="noBook" />
+    <BookList :books="books" title="Search Results"/>
 
-        <BookList />
+
       </section>
 
-      <Footer />
     </div>
   </div>
 </template>

@@ -2,24 +2,37 @@ import HomeView from '@/views/HomeView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/Auth'
 import { watch } from 'vue'
+import MainLayout from '@/layout/MainLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
+      name: 'mainlayout',
+      component: MainLayout,
+      children: [
+    {
+      path: '',
       name: 'home',
       component: HomeView,
+    }, {
+      path: '/library',
+      name: 'library',
+      component: () => import('../views/LibraryView.vue')
+    }
+      ]
     },
-    {
+     {
     path: '/login',
     name: 'login',
     component: () => import('../views/LoginView.vue')
-}, {
+    } , {
     path: '/signup',
     name: 'signUp',
     component: () => import('../views/SignUpView.vue')
-}
+    }
+
   ],
 })
 router.beforeEach(async(to, from, next) => {

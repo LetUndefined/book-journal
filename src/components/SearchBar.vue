@@ -3,7 +3,6 @@ import { useBookStore } from '@/stores/BookLogic'
 import { storeToRefs } from 'pinia'
 
 const bookStore = useBookStore()
-const { filters } = bookStore
 const { inputValue } = storeToRefs(bookStore)
 const { fetchSelectedBook } = bookStore
 
@@ -29,12 +28,6 @@ const getSelectedBook = (value: string) => {
         placeholder="Search"
         @click="getSelectedBook(inputValue)"
       />
-    </div>
-    <div class="search-bar-filters">
-      <button class="search-bar-filter search-bar-filter--active">All</button>
-      <button class="search-bar-filter" v-for="(filter, index) in filters" :key="index">
-        {{ filter }}
-      </button>
     </div>
   </div>
 </template>

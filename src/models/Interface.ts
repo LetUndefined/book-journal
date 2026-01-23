@@ -1,8 +1,8 @@
 export interface Book {
-  book_id?: string
+  book_id: string
   status: string
   title: string
-  author: string | undefined
+  author?: string | undefined
   cover?: string
 }
 

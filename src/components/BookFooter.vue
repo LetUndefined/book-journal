@@ -1,27 +1,30 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-svg-icons'
+
+
+
 </script>
 
 <template>
   <footer class="footer">
     <nav class="footer__nav">
-      <a href="#" class="footer__nav-item footer__nav-item--active">
+      <router-link :to="{name: 'home'}" class="footer__nav-item footer__nav-item--active">
         <font-awesome-icon :icon="faHouse" />
         <span>Home</span>
-      </a>
-      <a href="#" class="footer__nav-item">
+      </router-link>
+      <router-link :to="{name: 'library'}" href="#" class="footer__nav-item">
         <font-awesome-icon :icon="faBook" />
         <span>Library</span>
-      </a>
-      <a href="#" class="footer__nav-item">
+      </router-link>
+      <router-link :to="{name: ''}" class="footer__nav-item">
         <font-awesome-icon :icon="faChartColumn" />
         <span>Stats</span>
-      </a>
-      <a href="#" class="footer__nav-item">
+      </router-link>
+      <router-link :to="{name: ''}" class="footer__nav-item">
         <font-awesome-icon :icon="faUser" />
         <span>Profile</span>
-      </a>
+      </router-link>
     </nav>
   </footer>
 </template>

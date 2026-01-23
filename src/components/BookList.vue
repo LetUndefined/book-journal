@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useBookStore } from '@/stores/BookLogic'
+// import { useBookStore } from '@/stores/BookLogic'
 import BookCard from './BookCard.vue'
 import { storeToRefs } from 'pinia'
 import { modalTrigger } from '@/composables/modal'
@@ -8,10 +8,13 @@ import { useSupaStore } from '@/stores/SupaBase'
 
 
 
+defineProps<{
+  books: Book[] | null
+  title: string
+}>()
 
 
-const bookStore = useBookStore()
-const { books } = storeToRefs(bookStore)
+
 
 const supaStore = useSupaStore()
 const {selectedBook} = storeToRefs(supaStore)
@@ -29,7 +32,7 @@ function handleSaveBook(book: Book){
 
 <template>
   <div class="book-list-header">
-    <h2 class="book-list-title">My Library</h2>
+    <h2 class="book-list-title">{{ title }}</h2>
   </div>
 
   <div class="book-list-container">
