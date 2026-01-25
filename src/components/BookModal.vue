@@ -19,20 +19,23 @@ defineProps<{
 async function handleAddBook() {
   try {
     await insertData()
-    alert('Booked added succesfully!')
+    modalTrigger.value = false
+    selectedBook.value = null
   } catch (error) {
-    console.error(error)
-    alert('Book add failed')
+    alert(error)
+    selectedBook.value = null
   }
 }
 
 async function handleRemoveBook(){
   try{
     await removedata()
-    alert(' Book deleted from library')
+    modalTrigger.value = false
+    selectedBook.value = null
   } catch(error){
     console.error(error)
     alert('Failed removing book')
+    selectedBook.value = null
   }
 }
 
