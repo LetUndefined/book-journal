@@ -9,13 +9,12 @@ export const useSupaStore = defineStore('supebase', () => {
   const modalTrigger = ref(false)
 
   watch(modalTrigger, (isOpen) => {
-
     document.body.style.overflow = isOpen ? 'hidden' : ''
   })
 
 
 
-  async function insertData() {
+  async function insertData(rating: number, pepper: number) {
     const {
       data: { user },
       error: authError,
@@ -30,10 +29,14 @@ export const useSupaStore = defineStore('supebase', () => {
       author: selectedBook.value?.author,
       cover: selectedBook.value?.cover,
       status: selectedBook.value?.status.toLowerCase(),
+      rating: rating,
+      pepper: pepper
     }
+    console.log('Book data being sent:', bookData)
     const { data, error } = await supabase.from('user_books').insert(bookData).select()
 
     if (error) {
+      console.error('Full Supabase error:', JSON.stringify(error, null, 2))
       throw error
     }
     return data
@@ -56,7 +59,8 @@ export const useSupaStore = defineStore('supebase', () => {
           title: e.title,
           author: e.author,
           status: e.status,
-          cover: e.cover
+          cover: e.cover,
+          rating: e.rating
         }
         return book
       })

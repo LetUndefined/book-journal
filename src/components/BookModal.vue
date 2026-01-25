@@ -2,13 +2,14 @@
 import type { Book } from '@/models/Interface'
 import { useSupaStore } from '@/stores/SupaBase'
 import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
 
 const supaStore = useSupaStore()
-const { insertData } = supaStore
-const { removedata } = supaStore
-const {modalTrigger } = storeToRefs(supaStore)
-const {selectedBook} = storeToRefs(supaStore)
-const {libraryBooks} = storeToRefs(supaStore)
+const { insertData, removedata } = supaStore
+const {libraryBooks, selectedBook, modalTrigger} = storeToRefs(supaStore)
+
+const localrating = ref(1)
+const pepperRating = ref(1)
 
 
 
@@ -18,11 +19,11 @@ defineProps<{
 
 async function handleAddBook() {
   try {
-    await insertData()
+    await insertData(localrating.value, pepperRating.value)
     modalTrigger.value = false
     selectedBook.value = null
   } catch (error) {
-    alert(error)
+    alert('Failed adding book' + error)
     selectedBook.value = null
   }
 }
@@ -48,6 +49,17 @@ function checkBook(book_id: string){
  return libraryBooks.value?.find((e) => e.book_id == book_id)
 }
 
+function setRating(newRating: number){
+  if(selectedBook.value)
+  localrating.value = newRating
+}
+
+function setPepperRating(newPepper: number){
+  if(selectedBook.value)
+  pepperRating.value = newPepper
+console.log(pepperRating.value)
+}
+
 </script>
 
 <template>
@@ -57,6 +69,12 @@ function checkBook(book_id: string){
       <p>Title: {{ book.title }}</p>
       <p>Author: {{ book.author }}</p>
       <p>Status: {{ book.status }}</p>
+      <div class="rating">
+        <star-rating v-model="localrating" :increment="0.5" :show-rating="false" :star-size="35" @update:rating="setRating"/>
+        <div class="pepper-rating">
+          <span v-for="n in 5" :key="n" @click="setPepperRating(n)" class="pepper" :class="{ inactive: n > pepperRating }">🌶️</span>
+        </div>
+      </div>
       <div class="btn">
         <button class="submit" @click="handleAddBook()">Add To Library</button>
         <button v-if="selectedBook?.book_id && checkBook(selectedBook?.book_id)" class="remove" @click="handleRemoveBook()" >Remove From library</button>
@@ -112,7 +130,28 @@ function checkBook(book_id: string){
 .btn > * {
   padding: 0.25rem;
   border-radius: 10px;
+}
 
+.rating {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
 
+.pepper-rating {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.pepper {
+  user-select: none;
+}
+
+.pepper.inactive {
+  filter: grayscale(100%);
+  opacity: 0.4;
 }
 </style>

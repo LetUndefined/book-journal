@@ -22,7 +22,9 @@
     "@supabase/supabase-js": "^2.91.0",
     "pinia": "^3.0.4",
     "vue": "^3.5.26",
-    "vue-router": "^4.6.4"
+    "vue-rate-it": "^2.1.0",
+    "vue-router": "^4.6.4",
+    "vue-star-rating": "^2.1.0"
   },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.3",

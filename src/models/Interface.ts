@@ -4,6 +4,7 @@ export interface Book {
   title: string
   author?: string | undefined
   cover?: string
+  rating: number
 }
 
 export interface BookDetails {
