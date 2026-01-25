@@ -7,6 +7,7 @@ const props = defineProps<{
   title: string
   author?: string
   cover?: string
+  rating: number
 }>()
 
 const emit = defineEmits<{

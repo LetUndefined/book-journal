@@ -44,6 +44,7 @@ export const useBookStore = defineStore('books', () => {
           cover: e.cover_edition_key
             ? `https://covers.openlibrary.org/b/olid/${e.cover_edition_key}-M.jpg`
             : '/src/assets/No_cover.jpg',
+          rating: 0,
         }
         return book
       })
