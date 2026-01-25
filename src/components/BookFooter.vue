@@ -28,11 +28,12 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
 
 <style scoped>
 .footer {
+  position: fixed;
   background-color: var(--color-card-bg);
   border-top: 1px solid var(--color-border);
-  position: sticky;
   bottom: 0;
-  z-index: 100;
+  left: 0;
+  width: 100%;
   padding-bottom: var(--safe-area-bottom);
 }
 

@@ -7,9 +7,10 @@ import IsLoading from '@/components/IsLoading.vue'
 import { storeToRefs } from 'pinia'
 import NoBooksFound from '@/components/NoBooksFound.vue'
 import BookModal from '@/components/BookModal.vue'
-import { modalTrigger } from '@/composables/modal'
 import { useSupaStore } from '@/stores/SupaBase'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
+import type { Book } from '@/models/Interface'
+
 
 const bookStore = useBookStore()
 const { isLoading } = storeToRefs(bookStore)
@@ -19,43 +20,52 @@ const { books } = storeToRefs(bookStore)
 const supaStore = useSupaStore()
 const { selectedBook } = storeToRefs(supaStore)
 const { fetchData } = supaStore
+const {modalTrigger} = storeToRefs(supaStore)
+
+function handleBookClicked(book: Book) {
+  selectedBook.value = book
+  modalTrigger.value = true
+}
 
 onMounted(async () => {
   await fetchData()
+})
+
+onUnmounted(() => {
+  modalTrigger.value = false
+  selectedBook.value = null
 })
 </script>
 
 <template>
   <div class="container">
-    <div class="book-modal">
+
+<div class="book-modal">
       <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" />
     </div>
-
     <div class="loading" v-if="isLoading">
       <IsLoading />
     </div>
 
     <div class="home">
+
       <SearchBar />
       <section class="book-list">
         <NoBooksFound v-if="noBook" />
-        <BookList :books="books" title="Search Results" />
+        <BookList :books="books" title="Search Results" @book-clicked="handleBookClicked" />
       </section>
     </div>
   </div>
 </template>
 
 <style scoped>
-.container {
-  position: relative;
-}
 
 .book-modal {
-  position: absolute;
+  position: fixed;
   z-index: 9999;
+  height: 100vh;
 }
 .home {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;

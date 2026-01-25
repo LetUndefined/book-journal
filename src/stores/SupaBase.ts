@@ -1,11 +1,19 @@
 import { supabase } from '@/lib/supabase'
 import type { Book } from '@/models/Interface'
 import { defineStore } from 'pinia'
-import { ref, type Ref } from 'vue'
+import { ref, watch, type Ref } from 'vue'
 
 export const useSupaStore = defineStore('supebase', () => {
   const selectedBook: Ref<Book | null> = ref(null)
   const libraryBooks: Ref<Book[] | null> = ref(null)
+  const modalTrigger = ref(false)
+
+  watch(modalTrigger, (isOpen) => {
+
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+  })
+
+
 
   async function insertData() {
     const {
@@ -48,6 +56,7 @@ export const useSupaStore = defineStore('supebase', () => {
           title: e.title,
           author: e.author,
           status: e.status,
+          cover: e.cover
         }
         return book
       })
@@ -58,5 +67,18 @@ export const useSupaStore = defineStore('supebase', () => {
     }
   }
 
-  return { selectedBook, insertData, fetchData, libraryBooks }
+  async function removedata(){
+    const { error } = await supabase
+  .from('user_books')
+  .delete()
+  .eq('book_id', selectedBook.value?.book_id)
+  fetchData()
+
+  if(error){
+    throw error
+  }
+  }
+
+
+  return { selectedBook, insertData, fetchData, libraryBooks, removedata, modalTrigger }
 })

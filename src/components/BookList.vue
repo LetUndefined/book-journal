@@ -1,25 +1,19 @@
 <script setup lang="ts">
-// import { useBookStore } from '@/stores/BookLogic'
 import BookCard from './BookCard.vue'
-import { storeToRefs } from 'pinia'
-import { modalTrigger } from '@/composables/modal'
 import type { Book } from '@/models/Interface'
-import { useSupaStore } from '@/stores/SupaBase'
-import { emitTrigger } from '@/composables/EmitTrigger'
 
 defineProps<{
   books: Book[] | null
   title: string
 }>()
 
-const supaStore = useSupaStore()
-const { selectedBook } = storeToRefs(supaStore)
+const emit = defineEmits<{
+  (e: 'book-clicked', book: Book): void
+}>()
 
-function handleSaveBook(book: Book) {
-  selectedBook.value = book
-
-  modalTrigger.value = true
-  console.log('Book clicked: ', book)
+function handleEmit(book: Book) {
+    emit('book-clicked', book)
+    console.log('Emit fired')
 }
 </script>
 
@@ -37,8 +31,7 @@ function handleSaveBook(book: Book) {
       :status="book.status"
       :cover="book.cover"
       :book_id="book.book_id"
-      @save-book="handleSaveBook"
-      @click.stop="emitTrigger = true"
+      @save-book="handleEmit"
     />
   </div>
 </template>
@@ -62,36 +55,12 @@ function handleSaveBook(book: Book) {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  max-height: 100%;
+  padding: 0rem 0 1.5rem;
 }
 
 .book-list-container > * {
   flex: 0 0 calc(50% - 0.375rem);
 }
 
-.book-list-load-more {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
-  padding-bottom: var(--safe-area-bottom);
-}
 
-.book-list-load-btn {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-primary);
-  background: var(--color-card-bg);
-  border: 1.5px solid var(--color-primary);
-  border-radius: var(--radius-md);
-  padding: 0.75rem 2rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.book-list-load-btn:active {
-  transform: scale(0.96);
-  background: var(--color-primary);
-  color: white;
-}
 </style>

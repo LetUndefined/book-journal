@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { emitTrigger } from '@/composables/EmitTrigger'
 import type { Book } from '@/models/Interface'
 
 const props = defineProps<{
@@ -14,16 +13,13 @@ const emit = defineEmits<{
   (e: 'save-book', book: Book): void
 }>()
 
-const checkEmit = () => {
-  if (emitTrigger.value === true) {
-    emit('save-book', props)
-  }
-  emitTrigger.value = false
+const handleClick = () => {
+  emit('save-book', props)
 }
 </script>
 
 <template>
-  <div class="book-card" @click="checkEmit">
+  <div class="book-card" @click="handleClick">
     <div class="book-card__cover">
       <img :src="props.cover" alt="" class="cover-image" />
       <div class="book-card__badge">{{ props.status }}</div>
