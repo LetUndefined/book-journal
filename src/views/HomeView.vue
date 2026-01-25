@@ -11,7 +11,6 @@ import { useSupaStore } from '@/stores/SupaBase'
 import { onMounted, onUnmounted } from 'vue'
 import type { Book } from '@/models/Interface'
 
-
 const bookStore = useBookStore()
 const { isLoading } = storeToRefs(bookStore)
 const { noBook } = storeToRefs(bookStore)
@@ -20,7 +19,7 @@ const { books } = storeToRefs(bookStore)
 const supaStore = useSupaStore()
 const { selectedBook } = storeToRefs(supaStore)
 const { fetchData } = supaStore
-const {modalTrigger} = storeToRefs(supaStore)
+const { modalTrigger } = storeToRefs(supaStore)
 
 function handleBookClicked(book: Book) {
   selectedBook.value = book
@@ -39,8 +38,7 @@ onUnmounted(() => {
 
 <template>
   <div class="container">
-
-<div class="book-modal">
+    <div class="book-modal">
       <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" />
     </div>
     <div class="loading" v-if="isLoading">
@@ -48,7 +46,6 @@ onUnmounted(() => {
     </div>
 
     <div class="home">
-
       <SearchBar />
       <section class="book-list">
         <NoBooksFound v-if="noBook" />
@@ -59,7 +56,6 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-
 .book-modal {
   position: fixed;
   z-index: 9999;

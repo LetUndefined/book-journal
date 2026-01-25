@@ -2,7 +2,6 @@ import type { Book, Doc } from '@/models/Interface'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
-
 export const useBookStore = defineStore('books', () => {
   const inputValue = ref('')
   const filters = ['Reading', 'Completed', 'Thriller', 'Sci-Fi']

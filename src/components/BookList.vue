@@ -12,8 +12,8 @@ const emit = defineEmits<{
 }>()
 
 function handleEmit(book: Book) {
-    emit('book-clicked', book)
-    console.log('Emit fired')
+  emit('book-clicked', book)
+  console.log('Emit fired')
 }
 </script>
 
@@ -61,6 +61,4 @@ function handleEmit(book: Book) {
 .book-list-container > * {
   flex: 0 0 calc(50% - 0.375rem);
 }
-
-
 </style>

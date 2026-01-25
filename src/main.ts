@@ -11,8 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faBookOpen, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import StarRating from 'vue-star-rating'
 
-
-
 library.add(faBookOpen, faArrowRightFromBracket)
 
 const app = createApp(App)

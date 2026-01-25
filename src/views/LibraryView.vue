@@ -9,9 +9,9 @@ import { onMounted } from 'vue'
 
 const supaStore = useSupaStore()
 const { libraryBooks } = storeToRefs(supaStore)
-const {modalTrigger} = storeToRefs(supaStore)
-const {selectedBook} = storeToRefs(supaStore)
-const {fetchData} = supaStore
+const { modalTrigger } = storeToRefs(supaStore)
+const { selectedBook } = storeToRefs(supaStore)
+const { fetchData } = supaStore
 
 function handleClick(book: Book) {
   selectedBook.value = book
@@ -20,9 +20,8 @@ function handleClick(book: Book) {
 }
 
 onMounted(async () => {
-await fetchData()
+  await fetchData()
 })
-
 </script>
 
 <template>
@@ -30,12 +29,12 @@ await fetchData()
     <div class="book-modal">
       <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" />
     </div>
-<section class="filters">
-  <SearchFilters />
-</section>
-<div class="book-list">
-  <BookList :books="libraryBooks" title="Your Library" @book-clicked="handleClick"/>
-</div>
+    <section class="filters">
+      <SearchFilters />
+    </section>
+    <div class="book-list">
+      <BookList :books="libraryBooks" title="Your Library" @book-clicked="handleClick" />
+    </div>
   </div>
 </template>
 
@@ -44,7 +43,7 @@ await fetchData()
   position: relative;
 }
 
-.book-modal{
+.book-modal {
   position: fixed;
   z-index: 999;
 }
@@ -61,6 +60,4 @@ await fetchData()
   overflow-y: auto;
   position: relative;
 }
-
-
 </style>
