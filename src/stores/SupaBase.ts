@@ -2,6 +2,8 @@ import { supabase } from '@/lib/supabase'
 import type { Book } from '@/models/Interface'
 import { defineStore } from 'pinia'
 import { ref, watch, type Ref } from 'vue'
+import NoCover from '@/assets/No_cover.png'
+
 
 export const useSupaStore = defineStore('supebase', () => {
   const selectedBook: Ref<Book | null> = ref(null)
@@ -57,7 +59,7 @@ export const useSupaStore = defineStore('supebase', () => {
           title: e.title,
           author: e.author,
           status: e.status,
-          cover: e.cover,
+          cover: e.cover ? e.cover : NoCover,
           rating: e.rating,
           pepper: e.pepper,
         }

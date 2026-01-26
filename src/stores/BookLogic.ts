@@ -1,6 +1,7 @@
 import type { Book, Doc } from '@/models/Interface'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
+import NoCover from '@/assets/No_cover.png'
 
 export const useBookStore = defineStore('books', () => {
   const inputValue = ref('')
@@ -43,7 +44,7 @@ export const useBookStore = defineStore('books', () => {
           title: e.title,
           cover: e.cover_edition_key
             ? `https://covers.openlibrary.org/b/olid/${e.cover_edition_key}-M.jpg`
-            : '/src/assets/No_cover.jpg',
+            : NoCover,
           rating: 0,
           pepper: 0,
         }

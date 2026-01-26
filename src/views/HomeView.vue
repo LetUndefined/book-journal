@@ -26,7 +26,7 @@ function handleBookClicked(book: Book) {
   modalTrigger.value = true
 }
 
-const bookRating = computed(() => {
+const displayBooks = computed(() => {
     return books.value.map((e) => {
       const match = libraryBooks.value?.find((j) => j.book_id === e.book_id)
       return match || e
@@ -57,7 +57,7 @@ onUnmounted(() => {
       <SearchBar />
       <section class="book-list">
         <NoBooksFound v-if="noBook" />
-        <BookList :books="bookRating" title="Search Results" @book-clicked="handleBookClicked" />
+        <BookList :books="displayBooks" title="Search Results" @book-clicked="handleBookClicked" />
       </section>
     </div>
   </div>
