@@ -61,7 +61,7 @@ export const useSupaStore = defineStore('supebase', () => {
           title: e.title,
           author: e.author,
           status: e.status,
-          cover: e.cover ? e.cover : NoCover,
+          cover: e.cover && !e.cover.includes('src/assets') ? e.cover : NoCover,
           rating: e.rating,
           pepper: e.pepper,
         }
