@@ -32,6 +32,7 @@ function handleEmit(book: Book) {
       :cover="book.cover"
       :book_id="book.book_id"
       :rating="book.rating"
+      :pepper="book.pepper"
       @save-book="handleEmit"
     />
   </div>

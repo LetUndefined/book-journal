@@ -6,10 +6,12 @@ import { ref } from 'vue'
 
 const supaStore = useSupaStore()
 const { insertData, removedata } = supaStore
-const { libraryBooks, selectedBook, modalTrigger } = storeToRefs(supaStore)
+const {libraryBooks, selectedBook, modalTrigger} = storeToRefs(supaStore)
 
 const localrating = ref(1)
 const pepperRating = ref(1)
+
+
 
 defineProps<{
   book: Book
@@ -26,12 +28,12 @@ async function handleAddBook() {
   }
 }
 
-async function handleRemoveBook() {
-  try {
+async function handleRemoveBook(){
+  try{
     await removedata()
     modalTrigger.value = false
     selectedBook.value = null
-  } catch (error) {
+  } catch(error){
     console.error(error)
     alert('Failed removing book')
     selectedBook.value = null
@@ -43,55 +45,39 @@ function handleClose() {
   selectedBook.value = null
 }
 
-function checkBook(book_id: string) {
-  return libraryBooks.value?.find((e) => e.book_id == book_id)
+function checkBook(book_id: string){
+ return libraryBooks.value?.find((e) => e.book_id == book_id)
 }
 
-function setRating(newRating: number) {
-  if (selectedBook.value) localrating.value = newRating
+function setRating(newRating: number){
+  if(selectedBook.value)
+  localrating.value = newRating
 }
 
-function setPepperRating(newPepper: number) {
-  if (selectedBook.value) pepperRating.value = newPepper
-  console.log(pepperRating.value)
+function setPepperRating(newPepper: number){
+  if(selectedBook.value)
+  pepperRating.value = newPepper
+console.log(pepperRating.value)
 }
+
 </script>
 
 <template>
-  <div class="modal-container" @click="handleClose">
+  <div class="modal-container" @click="handleClose" >
     <div class="modal-content" @click.stop>
-      <span class="close" @click="handleClose">X</span>
+      <span class="close" @click="handleClose" >X</span>
       <p>Title: {{ book.title }}</p>
       <p>Author: {{ book.author }}</p>
       <p>Status: {{ book.status }}</p>
       <div class="rating">
-        <star-rating
-          v-model="localrating"
-          :increment="0.5"
-          :show-rating="false"
-          :star-size="35"
-          @update:rating="setRating"
-        />
+        <star-rating v-model="localrating" :increment="0.5" :show-rating="false" :star-size="35" @update:rating="setRating"/>
         <div class="pepper-rating">
-          <span
-            v-for="n in 5"
-            :key="n"
-            @click="setPepperRating(n)"
-            class="pepper"
-            :class="{ inactive: n > pepperRating }"
-            >🌶️</span
-          >
+          <span v-for="n in 5" :key="n" @click="setPepperRating(n)" class="pepper" :class="{ inactive: n > pepperRating }">🌶️</span>
         </div>
       </div>
       <div class="btn">
         <button class="submit" @click="handleAddBook()">Add To Library</button>
-        <button
-          v-if="selectedBook?.book_id && checkBook(selectedBook?.book_id)"
-          class="remove"
-          @click="handleRemoveBook()"
-        >
-          Remove From library
-        </button>
+        <button v-if="selectedBook?.book_id && checkBook(selectedBook?.book_id)" class="remove" @click="handleRemoveBook()" >Remove From library</button>
       </div>
     </div>
   </div>
@@ -125,7 +111,7 @@ function setPepperRating(newPepper: number) {
   border: 1px solid rgb(255, 255, 255);
 }
 
-.close {
+.close{
   position: absolute;
   top: 0;
   right: 0;
