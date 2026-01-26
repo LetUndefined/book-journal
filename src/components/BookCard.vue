@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Book } from '@/models/Interface'
-import { faPepperHot, faStar } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faPepperHot, faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const props = defineProps<{
   book_id: string
@@ -34,9 +34,7 @@ const handleClick = () => {
       <p class="book-card-author">{{ props.author }}</p>
 
       <div class="book-card-rating">
-        <div class="book-card-stars">
-          <FontAwesomeIcon :icon="faStar" /> {{ props.rating }}
-        </div>
+        <div class="book-card-stars"><FontAwesomeIcon :icon="faStar" /> {{ props.rating }}</div>
         <div class="book-card-peppers">
           <FontAwesomeIcon :icon="faPepperHot" /> {{ props.pepper }}
         </div>
@@ -121,7 +119,7 @@ const handleClick = () => {
   font-weight: 400;
 }
 
-.book-card-rating{
+.book-card-rating {
   display: flex;
   align-items: center;
   gap: 1rem;

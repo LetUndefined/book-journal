@@ -8,18 +8,17 @@ import { storeToRefs } from 'pinia'
 import NoBooksFound from '@/components/NoBooksFound.vue'
 import BookModal from '@/components/BookModal.vue'
 import { useSupaStore } from '@/stores/SupaBase'
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import type { Book } from '@/models/Interface'
 
 const bookStore = useBookStore()
-const { isLoading } = storeToRefs(bookStore)
-const { noBook } = storeToRefs(bookStore)
-const { books } = storeToRefs(bookStore)
+const { noBook, books, isLoading } = storeToRefs(bookStore)
 
 const supaStore = useSupaStore()
-const { selectedBook } = storeToRefs(supaStore)
+const { selectedBook, modalTrigger, libraryBooks } = storeToRefs(supaStore)
 const { fetchData } = supaStore
-const { modalTrigger } = storeToRefs(supaStore)
+
+const rating = ref()
 
 function handleBookClicked(book: Book) {
   selectedBook.value = book
@@ -28,6 +27,8 @@ function handleBookClicked(book: Book) {
 
 onMounted(async () => {
   await fetchData()
+  if (libraryBooks.value) rating.value = libraryBooks.value.map((e) => e.rating)
+  console.log(rating.value)
 })
 
 onUnmounted(() => {

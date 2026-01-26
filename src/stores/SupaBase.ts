@@ -59,7 +59,7 @@ export const useSupaStore = defineStore('supebase', () => {
           status: e.status,
           cover: e.cover,
           rating: e.rating,
-          pepper: e.pepper
+          pepper: e.pepper,
         }
         return book
       })
