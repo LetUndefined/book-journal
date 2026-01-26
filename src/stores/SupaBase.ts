@@ -10,7 +10,7 @@ export const useSupaStore = defineStore('supebase', () => {
   const modalTrigger = ref(false)
   const bookStatus = ref('Want to read')
   const localrating = ref(1)
-const pepperRating = ref(1)
+  const pepperRating = ref(1)
 
   watch(modalTrigger, (isOpen) => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -33,7 +33,6 @@ const pepperRating = ref(1)
       status: bookStatus.value.toLowerCase(),
       rating: localrating.value,
       pepper: pepperRating.value,
-
     }
     console.log('Book data being sent:', bookData)
     const { data, error } = await supabase.from('user_books').insert(bookData).select()
@@ -77,12 +76,11 @@ const pepperRating = ref(1)
 
   function loadBook(book_id: string) {
     const singleBook = libraryBooks.value?.find((e) => e.book_id === book_id)
-    if(singleBook){
+    if (singleBook) {
       bookStatus.value = singleBook.status
       localrating.value = singleBook.rating
       pepperRating.value = singleBook.pepper
     }
-
   }
 
   async function removeData() {
@@ -97,23 +95,35 @@ const pepperRating = ref(1)
     }
   }
 
-  async function updateData(){
+  async function updateData() {
     console.log(selectedBook.value?.book_id)
 
-    const {error} = await supabase
-    .from('user_books')
-    .update({
-      status: bookStatus.value.toLowerCase(),
-      rating: localrating.value,
-      pepper: pepperRating.value
-    })
-    .eq('book_id', selectedBook.value?.book_id)
+    const { error } = await supabase
+      .from('user_books')
+      .update({
+        status: bookStatus.value.toLowerCase(),
+        rating: localrating.value,
+        pepper: pepperRating.value,
+      })
+      .eq('book_id', selectedBook.value?.book_id)
     await fetchData()
 
-    if(error){
+    if (error) {
       throw error
     }
   }
 
-  return { selectedBook, insertData, fetchData, libraryBooks, removeData, modalTrigger, bookStatus, updateData, localrating, pepperRating, loadBook }
+  return {
+    selectedBook,
+    insertData,
+    fetchData,
+    libraryBooks,
+    removeData,
+    modalTrigger,
+    bookStatus,
+    updateData,
+    localrating,
+    pepperRating,
+    loadBook,
+  }
 })

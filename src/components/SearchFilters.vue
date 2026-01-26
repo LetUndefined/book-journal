@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-
-
-  const filters = ["All", 'Reading', 'Completed', 'DNF']
-  const activeFilterIndex = ref(0)
-
+const filters = ['All', 'Reading', 'Completed', 'DNF']
+const activeFilterIndex = ref(0)
 </script>
 
 <template>
   <div class="search-bar-filters">
-    <button class="search-bar-filter"  v-for="(filter, index) in filters"
-    :key="index" @click="activeFilterIndex = index" :class="{'active': activeFilterIndex === index}">
+    <button
+      class="search-bar-filter"
+      v-for="(filter, index) in filters"
+      :key="index"
+      @click="activeFilterIndex = index"
+      :class="{ active: activeFilterIndex === index }"
+    >
       {{ filter }}
     </button>
   </div>
@@ -41,8 +43,6 @@ import { ref } from 'vue';
   flex-shrink: 0;
   transition: all var(--transition-fast);
 }
-
-
 
 .active {
   background: var(--color-primary);

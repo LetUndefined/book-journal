@@ -8,7 +8,7 @@ import BookModal from '@/components/BookModal.vue'
 import { onMounted } from 'vue'
 
 const supaStore = useSupaStore()
-const { modalTrigger, selectedBook, libraryBooks} = storeToRefs(supaStore)
+const { modalTrigger, selectedBook, libraryBooks } = storeToRefs(supaStore)
 const { fetchData, loadBook } = supaStore
 
 function handleClick(book: Book) {

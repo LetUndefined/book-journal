@@ -15,7 +15,8 @@ const bookStore = useBookStore()
 const { noBook, books, isLoading } = storeToRefs(bookStore)
 
 const supaStore = useSupaStore()
-const { selectedBook, modalTrigger, libraryBooks, localrating, pepperRating, bookStatus } = storeToRefs(supaStore)
+const { selectedBook, modalTrigger, libraryBooks, localrating, pepperRating, bookStatus } =
+  storeToRefs(supaStore)
 const { fetchData } = supaStore
 
 function handleBookClicked(book: Book) {
@@ -34,8 +35,7 @@ onMounted(async () => {
   await fetchData()
   localrating.value = 0
   pepperRating.value = 0
-  bookStatus.value = ""
-
+  bookStatus.value = ''
 })
 
 onUnmounted(() => {
@@ -57,7 +57,7 @@ onUnmounted(() => {
       <SearchBar />
       <section class="book-list">
         <NoBooksFound v-if="noBook" />
-        <BookList  :books="displayBooks" title="Search Results" @book-clicked="handleBookClicked" />
+        <BookList :books="displayBooks" title="Search Results" @book-clicked="handleBookClicked" />
       </section>
     </div>
   </div>

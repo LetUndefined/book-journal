@@ -4,13 +4,10 @@ import { useSupaStore } from '@/stores/SupaBase'
 import { storeToRefs } from 'pinia'
 import BookChips from './BookChips.vue'
 
-
 const supaStore = useSupaStore()
 const { insertData, removeData, updateData } = supaStore
-const { libraryBooks, selectedBook, modalTrigger, bookStatus, localrating, pepperRating } = storeToRefs(supaStore)
-
-
-
+const { libraryBooks, selectedBook, modalTrigger, bookStatus, localrating, pepperRating } =
+  storeToRefs(supaStore)
 
 defineProps<{
   book: Book
@@ -58,21 +55,19 @@ function setPepperRating(newPepper: number) {
   console.log(pepperRating.value)
 }
 
-function setStatus(chip: string){
+function setStatus(chip: string) {
   bookStatus.value = chip
   console.log(bookStatus.value)
 }
 
-async function handleBookUpdate(){
-  try{
+async function handleBookUpdate() {
+  try {
     modalTrigger.value = false
     await updateData()
-  } catch(error){
+  } catch (error) {
     throw error
   }
 }
-
-
 </script>
 
 <template>
@@ -106,7 +101,9 @@ async function handleBookUpdate(){
       </div>
       <div class="btn">
         <button class="submit" v-if="!inLibrary" @click="handleAddBook()">Add To Library</button>
-        <button class="update" v-if="inLibrary" @click="handleBookUpdate()">Update information</button>
+        <button class="update" v-if="inLibrary" @click="handleBookUpdate()">
+          Update information
+        </button>
         <button
           v-if="selectedBook?.book_id && checkBook(selectedBook?.book_id)"
           class="remove"
@@ -169,7 +166,7 @@ async function handleBookUpdate(){
   color: black;
 }
 
-.chips{
+.chips {
   display: flex;
   gap: 1rem;
 }
