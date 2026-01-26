@@ -36,6 +36,13 @@ const router = createRouter({
     },
   ],
 })
+// Handle 404 redirect from GitHub Pages
+const redirect = sessionStorage.getItem('redirect')
+if (redirect) {
+  sessionStorage.removeItem('redirect')
+  router.replace(redirect)
+}
+
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
