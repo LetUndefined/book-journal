@@ -2,33 +2,35 @@
 import type { Book } from '@/models/Interface'
 import { useSupaStore } from '@/stores/SupaBase'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import BookChips from './BookChips.vue'
+
 
 const supaStore = useSupaStore()
-const { insertData, removedata } = supaStore
-const { libraryBooks, selectedBook, modalTrigger } = storeToRefs(supaStore)
+const { insertData, removeData, updateData } = supaStore
+const { libraryBooks, selectedBook, modalTrigger, bookStatus, localrating, pepperRating } = storeToRefs(supaStore)
 
-const localrating = ref(1)
-const pepperRating = ref(1)
+
+
 
 defineProps<{
   book: Book
+  inLibrary: boolean
 }>()
 
 async function handleAddBook() {
   try {
-    await insertData(localrating.value, pepperRating.value)
+    await insertData()
     modalTrigger.value = false
     selectedBook.value = null
-  } catch (error) {
-    alert('Failed adding book' + error)
+  } catch {
+    alert('Failed adding book, make sure to select every option')
     selectedBook.value = null
   }
 }
 
 async function handleRemoveBook() {
   try {
-    await removedata()
+    await removeData()
     modalTrigger.value = false
     selectedBook.value = null
   } catch (error) {
@@ -55,6 +57,22 @@ function setPepperRating(newPepper: number) {
   if (selectedBook.value) pepperRating.value = newPepper
   console.log(pepperRating.value)
 }
+
+function setStatus(chip: string){
+  bookStatus.value = chip
+  console.log(bookStatus.value)
+}
+
+async function handleBookUpdate(){
+  try{
+    modalTrigger.value = false
+    await updateData()
+  } catch(error){
+    throw error
+  }
+}
+
+
 </script>
 
 <template>
@@ -63,10 +81,13 @@ function setPepperRating(newPepper: number) {
       <span class="close" @click="handleClose">X</span>
       <p>Title: {{ book.title }}</p>
       <p>Author: {{ book.author }}</p>
-      <p>Status: {{ book.status }}</p>
+      <div class="chips">
+        <BookChips @save-status="setStatus" />
+      </div>
       <div class="rating">
         <star-rating
           v-model="localrating"
+          :rating="localrating"
           :increment="0.5"
           :show-rating="false"
           :star-size="35"
@@ -84,7 +105,8 @@ function setPepperRating(newPepper: number) {
         </div>
       </div>
       <div class="btn">
-        <button class="submit" @click="handleAddBook()">Add To Library</button>
+        <button class="submit" v-if="!inLibrary" @click="handleAddBook()">Add To Library</button>
+        <button class="update" v-if="inLibrary" @click="handleBookUpdate()">Update information</button>
         <button
           v-if="selectedBook?.book_id && checkBook(selectedBook?.book_id)"
           class="remove"
@@ -117,11 +139,11 @@ function setPepperRating(newPepper: number) {
   justify-content: center;
   align-items: center;
   background-color: var(--color-primary);
-  width: 300px;
-  height: 400px;
+  width: 400px;
+  height: 500px;
   border-radius: 10px;
   color: #ffffff;
-  gap: 0.5rem;
+  gap: 1.5rem;
   border: 1px solid rgb(255, 255, 255);
 }
 
@@ -138,12 +160,18 @@ function setPepperRating(newPepper: number) {
   justify-content: center;
   gap: 0.5rem;
   margin-top: 1rem;
-  width: 16rem;
 }
 
 .btn > * {
   padding: 0.25rem;
   border-radius: 10px;
+  background-color: var(--color-secondary);
+  color: black;
+}
+
+.chips{
+  display: flex;
+  gap: 1rem;
 }
 
 .rating {

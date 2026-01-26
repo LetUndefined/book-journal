@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { useBookStore } from '@/stores/BookLogic'
+import { ref } from 'vue';
 
-const bookStore = useBookStore()
-const { filters } = bookStore
+
+
+  const filters = ["All", 'Reading', 'Completed', 'DNF']
+  const activeFilterIndex = ref(0)
+
 </script>
 
 <template>
   <div class="search-bar-filters">
-    <button class="search-bar-filter search-bar-filter--active">All</button>
-    <button class="search-bar-filter" v-for="(filter, index) in filters" :key="index">
+    <button class="search-bar-filter"  v-for="(filter, index) in filters"
+    :key="index" @click="activeFilterIndex = index" :class="{'active': activeFilterIndex === index}">
       {{ filter }}
     </button>
   </div>
@@ -39,11 +42,9 @@ const { filters } = bookStore
   transition: all var(--transition-fast);
 }
 
-.search-bar-filter:active {
-  transform: scale(0.96);
-}
 
-.search-bar-filter--active {
+
+.active {
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: white;

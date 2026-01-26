@@ -11,15 +11,12 @@ import { useSupaStore } from '@/stores/SupaBase'
 import { computed, onMounted, onUnmounted } from 'vue'
 import type { Book } from '@/models/Interface'
 
-
 const bookStore = useBookStore()
 const { noBook, books, isLoading } = storeToRefs(bookStore)
 
 const supaStore = useSupaStore()
-const { selectedBook, modalTrigger, libraryBooks } = storeToRefs(supaStore)
+const { selectedBook, modalTrigger, libraryBooks, localrating, pepperRating, bookStatus } = storeToRefs(supaStore)
 const { fetchData } = supaStore
-
-
 
 function handleBookClicked(book: Book) {
   selectedBook.value = book
@@ -27,16 +24,19 @@ function handleBookClicked(book: Book) {
 }
 
 const displayBooks = computed(() => {
-    return books.value.map((e) => {
-      const match = libraryBooks.value?.find((j) => j.book_id === e.book_id)
-      return match || e
-    })
+  return books.value.map((e) => {
+    const match = libraryBooks.value?.find((j) => j.book_id === e.book_id)
+    return match || e
   })
+})
 
 onMounted(async () => {
   await fetchData()
-})
+  localrating.value = 0
+  pepperRating.value = 0
+  bookStatus.value = ""
 
+})
 
 onUnmounted(() => {
   modalTrigger.value = false
@@ -47,7 +47,7 @@ onUnmounted(() => {
 <template>
   <div class="container">
     <div class="book-modal">
-      <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" />
+      <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" :in-library="false" />
     </div>
     <div class="loading" v-if="isLoading">
       <IsLoading />
@@ -57,7 +57,7 @@ onUnmounted(() => {
       <SearchBar />
       <section class="book-list">
         <NoBooksFound v-if="noBook" />
-        <BookList :books="displayBooks" title="Search Results" @book-clicked="handleBookClicked" />
+        <BookList  :books="displayBooks" title="Search Results" @book-clicked="handleBookClicked" />
       </section>
     </div>
   </div>

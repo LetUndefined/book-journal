@@ -8,15 +8,13 @@ import BookModal from '@/components/BookModal.vue'
 import { onMounted } from 'vue'
 
 const supaStore = useSupaStore()
-const { libraryBooks } = storeToRefs(supaStore)
-const { modalTrigger } = storeToRefs(supaStore)
-const { selectedBook } = storeToRefs(supaStore)
-const { fetchData } = supaStore
+const { modalTrigger, selectedBook, libraryBooks} = storeToRefs(supaStore)
+const { fetchData, loadBook } = supaStore
 
 function handleClick(book: Book) {
   selectedBook.value = book
+  loadBook(book.book_id)
   modalTrigger.value = true
-  console.log(selectedBook.value)
 }
 
 onMounted(async () => {
@@ -27,7 +25,7 @@ onMounted(async () => {
 <template>
   <div class="container">
     <div class="book-modal">
-      <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" />
+      <BookModal :in-library="true" v-if="modalTrigger && selectedBook" :book="selectedBook" />
     </div>
     <section class="filters">
       <SearchFilters />

@@ -5,7 +5,6 @@ import NoCover from '@/assets/No_cover.png'
 
 export const useBookStore = defineStore('books', () => {
   const inputValue = ref('')
-  const filters = ['Reading', 'Completed', 'Thriller', 'Sci-Fi']
   // const url = 'https://openlibrary.org/search.json?q=subject:'
   const books: Ref<Book[]> = ref([])
   const isLoading = ref(false)
@@ -39,7 +38,7 @@ export const useBookStore = defineStore('books', () => {
       .map((e: Doc) => {
         const book: Book = {
           book_id: e.key,
-          status: 'Reading',
+          status: 'Not Read',
           author: e.author_name && e.author_name.length > 0 ? e.author_name[0] : 'unknown author',
           title: e.title,
           cover: e.cover_edition_key
@@ -52,5 +51,5 @@ export const useBookStore = defineStore('books', () => {
       })
   }
 
-  return { filters, books, inputValue, fetchSelectedBook, isLoading, noBook }
+  return { books, inputValue, fetchSelectedBook, isLoading, noBook }
 })

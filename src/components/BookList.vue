@@ -13,7 +13,6 @@ const emit = defineEmits<{
 
 function handleEmit(book: Book) {
   emit('book-clicked', book)
-  console.log('Emit fired')
 }
 </script>
 
