@@ -8,8 +8,9 @@ import { storeToRefs } from 'pinia'
 import NoBooksFound from '@/components/NoBooksFound.vue'
 import BookModal from '@/components/BookModal.vue'
 import { useSupaStore } from '@/stores/SupaBase'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import type { Book } from '@/models/Interface'
+
 
 const bookStore = useBookStore()
 const { noBook, books, isLoading } = storeToRefs(bookStore)
@@ -18,18 +19,24 @@ const supaStore = useSupaStore()
 const { selectedBook, modalTrigger, libraryBooks } = storeToRefs(supaStore)
 const { fetchData } = supaStore
 
-const rating = ref()
+
 
 function handleBookClicked(book: Book) {
   selectedBook.value = book
   modalTrigger.value = true
 }
 
+const bookRating = computed(() => {
+    return books.value.map((e) => {
+      const match = libraryBooks.value?.find((j) => j.book_id === e.book_id)
+      return match || e
+    })
+  })
+
 onMounted(async () => {
   await fetchData()
-  if (libraryBooks.value) rating.value = libraryBooks.value.map((e) => e.rating)
-  console.log(rating.value)
 })
+
 
 onUnmounted(() => {
   modalTrigger.value = false
@@ -50,7 +57,7 @@ onUnmounted(() => {
       <SearchBar />
       <section class="book-list">
         <NoBooksFound v-if="noBook" />
-        <BookList :books="books" title="Search Results" @book-clicked="handleBookClicked" />
+        <BookList :books="bookRating" title="Search Results" @book-clicked="handleBookClicked" />
       </section>
     </div>
   </div>

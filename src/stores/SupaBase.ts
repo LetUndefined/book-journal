@@ -82,5 +82,7 @@ export const useSupaStore = defineStore('supebase', () => {
     }
   }
 
+
+
   return { selectedBook, insertData, fetchData, libraryBooks, removedata, modalTrigger }
 })
