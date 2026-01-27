@@ -59,13 +59,15 @@ const handleClick = () => {
 
 .book-card-cover {
   position: relative;
-  aspect-ratio: 3 / 4;
+  width: 100%;
+  height: 300px;
+  overflow: visible;
 }
 
 .cover-image {
   width: 100%;
-  height: 300px;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
 }
 
 .book-card-cover-placeholder {
@@ -84,7 +86,7 @@ const handleClick = () => {
 
 .book-card-badge {
   position: absolute;
-  top: 0.5rem;
+  bottom: 0.5rem;
   right: 0.5rem;
   background: var(--color-accent);
   color: var(--color-primary);
