@@ -1,8 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const filters = ['All', 'Reading', 'Completed', 'DNF']
+const filters = ['All', 'Reading', 'Completed', 'DNF', 'Want to read']
 const activeFilterIndex = ref(0)
+
+const emit = defineEmits<{
+  (e: 'filter', selectedFilter: string): void
+}>()
+
+const handleEmit = (index: number, filter: string) => {
+  activeFilterIndex.value = index
+  console.log(filter)
+  emit('filter', filter)
+}
 </script>
 
 <template>
@@ -11,7 +21,7 @@ const activeFilterIndex = ref(0)
       class="search-bar-filter"
       v-for="(filter, index) in filters"
       :key="index"
-      @click="activeFilterIndex = index"
+      @click="handleEmit(index, filter)"
       :class="{ active: activeFilterIndex === index }"
     >
       {{ filter }}

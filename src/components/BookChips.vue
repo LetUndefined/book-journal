@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const status = ref(['Reading', 'Completed', 'DNF'])
+const status = ref(['Reading', 'Completed', 'DNF', 'Want to read'])
 
 const emit = defineEmits<{
   (e: 'save-status', statusChip: string): void

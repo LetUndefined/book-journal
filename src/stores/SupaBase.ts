@@ -8,9 +8,24 @@ export const useSupaStore = defineStore('supebase', () => {
   const selectedBook: Ref<Book | null> = ref(null)
   const libraryBooks: Ref<Book[] | null> = ref(null)
   const modalTrigger = ref(false)
-  const bookStatus = ref('Want to read')
-  const localrating = ref(1)
+  const bookStatus = ref('No Status')
+  const localrating = ref(0.5)
   const pepperRating = ref(1)
+  const filteredBooks: Ref<Book[] | null> = ref(null)
+
+// change status format for database (add underscore)
+  function convertStatusToDb(status: string): string {
+    return status.toLowerCase().replace(/\s+/g, '_')
+  }
+
+  // Change status format for display (without underscore)
+  function convertStatusToDisplay(status: string): string {
+    return status
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+  }
+
 
   watch(modalTrigger, (isOpen) => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -30,7 +45,7 @@ export const useSupaStore = defineStore('supebase', () => {
       title: selectedBook.value?.title,
       author: selectedBook.value?.author,
       cover: selectedBook.value?.cover,
-      status: bookStatus.value.toLowerCase(),
+      status: convertStatusToDb(bookStatus.value),
       rating: localrating.value,
       pepper: pepperRating.value,
     }
@@ -60,7 +75,7 @@ export const useSupaStore = defineStore('supebase', () => {
           book_id: e.book_id,
           title: e.title,
           author: e.author,
-          status: e.status,
+          status: convertStatusToDisplay(e.status),
           cover: e.cover && !e.cover.includes('src/assets') ? e.cover : NoCover,
           rating: e.rating,
           pepper: e.pepper,
@@ -96,12 +111,11 @@ export const useSupaStore = defineStore('supebase', () => {
   }
 
   async function updateData() {
-    console.log(selectedBook.value?.book_id)
 
     const { error } = await supabase
       .from('user_books')
       .update({
-        status: bookStatus.value.toLowerCase(),
+        status: convertStatusToDb(bookStatus.value),
         rating: localrating.value,
         pepper: pepperRating.value,
       })
@@ -110,6 +124,17 @@ export const useSupaStore = defineStore('supebase', () => {
 
     if (error) {
       throw error
+    }
+  }
+
+  function filterLibraryBooks(filter: string) {
+    if(filter === 'All'){
+      filteredBooks.value = null
+      return libraryBooks.value
+    } else {
+      if(libraryBooks.value)
+        filteredBooks.value = libraryBooks.value?.filter((e) => e.status.toLowerCase() === filter.toLowerCase())
+      return filteredBooks.value
     }
   }
 
@@ -125,5 +150,7 @@ export const useSupaStore = defineStore('supebase', () => {
     localrating,
     pepperRating,
     loadBook,
+    filterLibraryBooks,
+    filteredBooks
   }
 })

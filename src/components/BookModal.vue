@@ -52,12 +52,12 @@ function setRating(newRating: number) {
 
 function setPepperRating(newPepper: number) {
   if (selectedBook.value) pepperRating.value = newPepper
-  console.log(pepperRating.value)
+
 }
 
 function setStatus(chip: string) {
   bookStatus.value = chip
-  console.log(bookStatus.value)
+
 }
 
 async function handleBookUpdate() {
