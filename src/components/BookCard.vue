@@ -104,6 +104,7 @@ const handleClick = () => {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  flex: 1;
 }
 
 .book-card-title {
@@ -112,8 +113,6 @@ const handleClick = () => {
   font-weight: 600;
   color: var(--color-text);
   line-height: 1.3;
-  display: -webkit-box;
-  overflow: hidden;
 }
 
 .book-card-author {
@@ -126,5 +125,6 @@ const handleClick = () => {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-top: auto;
 }
 </style>

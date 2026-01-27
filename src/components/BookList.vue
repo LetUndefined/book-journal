@@ -66,6 +66,8 @@ function handleEmit(book: Book) {
 }
 
 .book-list-container > * {
-  flex: 0 0 calc(50% - 0.375rem);
+  flex: 1 1 calc(50% - 0.375rem);
+  min-width: calc(50% - 0.375rem);
+  max-width: calc(50% - 0.375rem);
 }
 </style>

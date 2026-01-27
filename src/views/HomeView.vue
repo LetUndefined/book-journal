@@ -56,8 +56,11 @@ onUnmounted(() => {
     <div class="home">
       <SearchBar />
       <section class="book-list">
+        <div v-if="books.length === 0 && !noBook && !isLoading" class="empty-state">
+          <p>Use the search function above to find books</p>
+        </div>
         <NoBooksFound v-if="noBook" />
-        <BookList :books="displayBooks" title="Search Results" @book-clicked="handleBookClicked" />
+        <BookList v-if="books.length > 0" :books="displayBooks" title="Search Results" @book-clicked="handleBookClicked" />
       </section>
     </div>
   </div>
@@ -84,5 +87,14 @@ onUnmounted(() => {
 
 .loading {
   position: absolute;
+}
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  color: #666;
+  font-size: 1.1rem;
 }
 </style>
