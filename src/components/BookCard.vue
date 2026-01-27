@@ -85,10 +85,10 @@ const handleClick = () => {
 .book-card-badge {
   position: absolute;
   top: 0.5rem;
-  right: 0.5rem;
+  right: 1.5rem;
   background: var(--color-accent);
   color: var(--color-primary);
-  font-size: 0.625rem;
+  font-size: 0.6rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
