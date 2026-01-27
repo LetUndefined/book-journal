@@ -5,20 +5,20 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
 
 <template>
   <footer class="footer">
-    <nav class="footer__nav">
-      <router-link :to="{ name: 'home' }" class="footer__nav-item footer__nav-item--active">
+    <nav class="footer-nav">
+      <router-link :to="{ name: 'home' }" class="footer-nav-item">
         <font-awesome-icon :icon="faHouse" />
         <span>Home</span>
       </router-link>
-      <router-link :to="{ name: 'library' }" href="#" class="footer__nav-item">
+      <router-link :to="{ name: 'library' }" href="#" class="footer-nav-item">
         <font-awesome-icon :icon="faBook" />
         <span>Library</span>
       </router-link>
-      <router-link :to="{ name: '' }" class="footer__nav-item">
+      <router-link :to="{ name: 'stats' }" class="footer-nav-item">
         <font-awesome-icon :icon="faChartColumn" />
         <span>Stats</span>
       </router-link>
-      <router-link :to="{ name: '' }" class="footer__nav-item">
+      <router-link :to="{ name: 'profile' }" class="footer-nav-item">
         <font-awesome-icon :icon="faUser" />
         <span>Profile</span>
       </router-link>
@@ -35,16 +35,18 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
   left: 0;
   width: 100%;
   padding-bottom: var(--safe-area-bottom);
+  box-shadow: 0px 0px 10px -4px;
+
 }
 
-.footer__nav {
+.footer-nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 56px;
 }
 
-.footer__nav-item {
+.footer-nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,31 +55,35 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
   color: var(--color-text-muted);
   text-decoration: none;
   transition: color var(--transition-fast);
-  -webkit-tap-highlight-color: transparent;
+
 }
 
-.footer__nav-item:active {
+.footer-nav-item:active {
   transform: scale(0.95);
 }
 
-.footer__nav-item svg {
+.footer-nav-item svg {
   width: 24px;
   height: 24px;
   font-size: 24px;
 }
 
-.footer__nav-item span {
+.footer-nav-item span {
   font-size: 0.625rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
 
-.footer__nav-item--active {
+.footer-nav-item--active {
   color: var(--color-primary);
 }
 
-.footer__nav-item--active svg {
+.footer-nav-item--active svg {
   font-weight: 900;
+}
+
+.router-link-exact-active{
+  box-shadow: 0px 0px 10px -1px;
 }
 </style>
