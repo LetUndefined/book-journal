@@ -30,6 +30,9 @@ async function handleAddBook() {
 async function handleRemoveBook() {
   try {
     await removeData()
+    localrating.value = 0
+    pepperRating.value = 0
+    bookStatus.value = ''
     modalTrigger.value = false
     selectedBook.value = null
   } catch (error) {
@@ -79,7 +82,7 @@ async function handleBookUpdate() {
       <p>Title: {{ book.title }}</p>
       <p>Author: {{ book.author }}</p>
       <div class="chips">
-        <BookChips @save-status="setStatus" />
+        <BookChips :chip="bookStatus" @save-status="setStatus" />
       </div>
       <div class="rating">
         <star-rating

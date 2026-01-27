@@ -17,11 +17,23 @@ const { noBook, books, isLoading } = storeToRefs(bookStore)
 const supaStore = useSupaStore()
 const { selectedBook, modalTrigger, libraryBooks, localrating, pepperRating, bookStatus } =
   storeToRefs(supaStore)
-const { fetchData } = supaStore
+const { fetchData, loadBook } = supaStore
 
 function handleBookClicked(book: Book) {
   selectedBook.value = book
+  const inLibrary = isBookInLibrary(book)
+  if (inLibrary) {
+    loadBook(book.book_id)
+  } else {
+    localrating.value = 0
+    pepperRating.value = 0
+    bookStatus.value = ''
+  }
   modalTrigger.value = true
+}
+
+function isBookInLibrary(book: Book): boolean {
+  return !!libraryBooks.value?.find((e) => e.book_id === book.book_id)
 }
 
 const displayBooks = computed(() => {
@@ -47,7 +59,7 @@ onUnmounted(() => {
 <template>
   <div class="container">
     <div class="book-modal">
-      <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" :in-library="false" />
+      <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" :in-library="isBookInLibrary(selectedBook)" />
     </div>
     <div class="loading" v-if="isLoading">
       <IsLoading />
