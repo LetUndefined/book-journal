@@ -20,13 +20,16 @@ const getSelectedBook = (value: string) => {
         class="search-bar-input"
         placeholder="Search books..."
         v-model="inputValue"
+        @keyup.enter="getSelectedBook(inputValue)"
+
       />
       <input
         type="button"
         class="btn"
         value="Search"
         placeholder="Search"
-        @click="getSelectedBook(inputValue)"
+        @click.enter="getSelectedBook(inputValue)"
+
       />
     </div>
   </div>
@@ -49,6 +52,7 @@ const getSelectedBook = (value: string) => {
   border-radius: var(--radius-lg);
   padding: 0 1rem;
   transition: all var(--transition-normal);
+  box-shadow: 0px 0px 10px -5px;
 }
 
 .search-bar__icon {

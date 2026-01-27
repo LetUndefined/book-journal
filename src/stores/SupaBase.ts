@@ -51,6 +51,9 @@ export const useSupaStore = defineStore('supebase', () => {
     }
     console.log('Book data being sent:', bookData)
     const { data, error } = await supabase.from('user_books').insert(bookData).select()
+    await fetchData()
+
+
 
     if (error) {
       console.error('Full Supabase error:', JSON.stringify(error, null, 2))

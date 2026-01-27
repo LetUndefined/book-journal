@@ -9,6 +9,8 @@ const { insertData, removeData, updateData } = supaStore
 const { libraryBooks, selectedBook, modalTrigger, bookStatus, localrating, pepperRating } =
   storeToRefs(supaStore)
 
+
+
 defineProps<{
   book: Book
   inLibrary: boolean
