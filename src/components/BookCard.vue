@@ -51,6 +51,7 @@ const handleClick = () => {
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 2px 5px -2px;
 }
 
 .book-card:active {
@@ -89,7 +90,7 @@ const handleClick = () => {
   bottom: 0.5rem;
   right: 0.5rem;
   background: var(--color-accent);
-  color: var(--color-primary);
+  color: rgb(0, 0, 0);
   font-size: 0.6rem;
   font-weight: 600;
   text-transform: uppercase;

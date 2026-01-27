@@ -7,22 +7,22 @@
 }
 
 :root {
-  --color-primary: #2d4a3e;
-  --color-primary-light: #3d5f4f;
-  --color-secondary: #f8f5f0;
-  --color-accent: #c9a227;
-  --color-accent-light: #d4b545;
-  --color-text: #2c2c2c;
-  --color-text-muted: #6b6b6b;
-  --color-border: #e5e0d8;
-  --color-card-bg: #ffffff;
+  --color-primary: #8b7ba8;
+  --color-primary-light: #a693c4;
+  --color-secondary: #e4d8f6;
+  --color-accent: #c8a8e0;
+  --color-accent-light: #d9bceb;
+  --color-text: #4a3d5a;
+  --color-text-muted: #8b7ba8;
+  --color-border: #e4dced;
+  --color-card-bg: #faf8fc;
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Outfit', -apple-system, sans-serif;
 
-  --shadow-sm: 0 2px 8px rgba(45, 74, 62, 0.08);
-  --shadow-md: 0 4px 16px rgba(45, 74, 62, 0.12);
-  --shadow-lg: 0 8px 32px rgba(45, 74, 62, 0.16);
+  --shadow-sm: 0 2px 8px rgba(139, 123, 168, 0.08);
+  --shadow-md: 0 4px 16px rgba(139, 123, 168, 0.12);
+  --shadow-lg: 0 8px 32px rgba(139, 123, 168, 0.16);
 
   --radius-sm: 6px;
   --radius-md: 10px;
