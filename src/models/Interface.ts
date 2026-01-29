@@ -52,3 +52,11 @@ export interface Doc {
   id_librivox?: string[]
   id_project_gutenberg?: string[]
 }
+
+export interface Profile {
+  user_id: string
+  username: string
+  display_name: string
+  avatar_url?: string
+  reading_goal?: number
+}

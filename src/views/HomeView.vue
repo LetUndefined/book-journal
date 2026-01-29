@@ -59,7 +59,11 @@ onUnmounted(() => {
 <template>
   <div class="container">
     <div class="book-modal">
-      <BookModal v-if="modalTrigger && selectedBook" :book="selectedBook" :in-library="isBookInLibrary(selectedBook)" />
+      <BookModal
+        v-if="modalTrigger && selectedBook"
+        :book="selectedBook"
+        :in-library="isBookInLibrary(selectedBook)"
+      />
     </div>
     <div class="loading" v-if="isLoading">
       <IsLoading />
@@ -69,10 +73,17 @@ onUnmounted(() => {
       <SearchBar />
       <section class="book-list">
         <div v-if="books.length === 0 && !noBook && !isLoading" class="empty-state">
-          <p>Use the search bar above to find books and add them to your library by clicking on them!</p>
+          <p>
+            Use the search bar above to find books and add them to your library by clicking on them!
+          </p>
         </div>
         <NoBooksFound v-if="noBook" />
-        <BookList v-if="books.length > 0" :books="displayBooks" title="Search Results" @book-clicked="handleBookClicked" />
+        <BookList
+          v-if="books.length > 0"
+          :books="displayBooks"
+          title="Search Results"
+          @book-clicked="handleBookClicked"
+        />
       </section>
     </div>
   </div>

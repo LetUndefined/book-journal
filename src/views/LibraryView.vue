@@ -21,7 +21,6 @@ function showFilteredBooks() {
   return filteredBooks.value ? filteredBooks.value : libraryBooks.value
 }
 
-
 onMounted(async () => {
   await fetchData()
   filteredBooks.value = null
@@ -34,7 +33,7 @@ onMounted(async () => {
       <BookModal :in-library="true" v-if="modalTrigger && selectedBook" :book="selectedBook" />
     </div>
     <section class="filters">
-      <SearchFilters @filter="filterLibraryBooks"/>
+      <SearchFilters @filter="filterLibraryBooks" />
     </section>
     <div class="book-list">
       <BookList :books="showFilteredBooks()" title="Your Library" @book-clicked="handleClick" />

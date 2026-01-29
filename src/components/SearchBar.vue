@@ -21,7 +21,6 @@ const getSelectedBook = (value: string) => {
         placeholder="Search books..."
         v-model="inputValue"
         @keyup.enter="getSelectedBook(inputValue)"
-
       />
       <input
         type="button"
@@ -29,7 +28,6 @@ const getSelectedBook = (value: string) => {
         value="Search"
         placeholder="Search"
         @click.enter="getSelectedBook(inputValue)"
-
       />
     </div>
   </div>

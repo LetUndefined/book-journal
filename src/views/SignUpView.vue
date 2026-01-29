@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useAuthStore } from '@/stores/Auth'
 import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
 const authStore = useAuthStore()
 const { signUp } = authStore
+const { name, lastName, email, password } = storeToRefs(authStore)
 const router = useRouter()
-
-const email = ref('')
-const password = ref('')
 
 async function handleSignUp() {
   try {
-    await signUp(email.value, password.value)
+    await signUp()
     router.push({ name: 'home' })
   } catch (error) {
     alert(error)
@@ -27,6 +25,14 @@ async function handleSignUp() {
       <p class="subtitle">Create your account</p>
 
       <form class="signup-form" @submit.prevent="handleSignUp()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" placeholder="Name" required v-model="name" />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" placeholder="Last Name" required v-model="lastName" />
+        </div>
         <div class="form-group">
           <label for="email">Email</label>
           <input id="email" type="email" placeholder="your@email.com" required v-model="email" />

@@ -36,7 +36,6 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
   width: 100%;
   padding-bottom: var(--safe-area-bottom);
   box-shadow: 0px 0px 10px -4px;
-
 }
 
 .footer-nav {
@@ -55,7 +54,6 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
   color: var(--color-text-muted);
   text-decoration: none;
   transition: color var(--transition-fast);
-
 }
 
 .footer-nav-item:active {
@@ -83,7 +81,7 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
   font-weight: 900;
 }
 
-.router-link-exact-active{
+.router-link-exact-active {
   box-shadow: 0px 0px 10px -1px;
 }
 </style>

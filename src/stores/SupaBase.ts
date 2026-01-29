@@ -12,8 +12,10 @@ export const useSupaStore = defineStore('supebase', () => {
   const localrating = ref(0.5)
   const pepperRating = ref(1)
   const filteredBooks: Ref<Book[] | null> = ref(null)
+const modalTriggerComponent = ref(false)
 
-// change status format for database (add underscore)
+
+  // change status format for database (add underscore)
   function convertStatusToDb(status: string): string {
     return status.toLowerCase().replace(/\s+/g, '_')
   }
@@ -22,10 +24,9 @@ export const useSupaStore = defineStore('supebase', () => {
   function convertStatusToDisplay(status: string): string {
     return status
       .split('_')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ')
   }
-
 
   watch(modalTrigger, (isOpen) => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -52,8 +53,6 @@ export const useSupaStore = defineStore('supebase', () => {
     console.log('Book data being sent:', bookData)
     const { data, error } = await supabase.from('user_books').insert(bookData).select()
     await fetchData()
-
-
 
     if (error) {
       console.error('Full Supabase error:', JSON.stringify(error, null, 2))
@@ -114,7 +113,6 @@ export const useSupaStore = defineStore('supebase', () => {
   }
 
   async function updateData() {
-
     const { error } = await supabase
       .from('user_books')
       .update({
@@ -131,12 +129,14 @@ export const useSupaStore = defineStore('supebase', () => {
   }
 
   function filterLibraryBooks(filter: string) {
-    if(filter === 'All'){
+    if (filter === 'All') {
       filteredBooks.value = null
       return libraryBooks.value
     } else {
-      if(libraryBooks.value)
-        filteredBooks.value = libraryBooks.value?.filter((e) => e.status.toLowerCase() === filter.toLowerCase())
+      if (libraryBooks.value)
+        filteredBooks.value = libraryBooks.value?.filter(
+          (e) => e.status.toLowerCase() === filter.toLowerCase(),
+        )
       return filteredBooks.value
     }
   }
@@ -154,6 +154,7 @@ export const useSupaStore = defineStore('supebase', () => {
     pepperRating,
     loadBook,
     filterLibraryBooks,
-    filteredBooks
+    filteredBooks,
+    modalTriggerComponent
   }
 })

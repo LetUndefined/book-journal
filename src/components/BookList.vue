@@ -2,14 +2,10 @@
 import BookCard from './BookCard.vue'
 import type { Book } from '@/models/Interface'
 
-
-
-
 defineProps<{
   books: Book[] | null
   title: string
 }>()
-
 
 const emit = defineEmits<{
   (e: 'book-clicked', book: Book): void
@@ -18,8 +14,6 @@ const emit = defineEmits<{
 function handleEmit(book: Book) {
   emit('book-clicked', book)
 }
-
-
 </script>
 
 <template>

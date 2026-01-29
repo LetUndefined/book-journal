@@ -9,8 +9,6 @@ const { insertData, removeData, updateData } = supaStore
 const { libraryBooks, selectedBook, modalTrigger, bookStatus, localrating, pepperRating } =
   storeToRefs(supaStore)
 
-
-
 defineProps<{
   book: Book
   inLibrary: boolean
@@ -57,12 +55,10 @@ function setRating(newRating: number) {
 
 function setPepperRating(newPepper: number) {
   if (selectedBook.value) pepperRating.value = newPepper
-
 }
 
 function setStatus(chip: string) {
   bookStatus.value = chip
-
 }
 
 async function handleBookUpdate() {
