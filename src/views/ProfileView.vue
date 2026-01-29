@@ -57,7 +57,7 @@ if(profileInformation.value?.reading_goal)
       <div class="progress-section">
         <div class="progress-stats">
           <div class="stat-item">
-            <span class="stat-number">{{ getProgress }}</span>
+            <span class="stat-number">{{ getProgress ?? 0 }}</span>
             <span class="stat-label">Read</span>
           </div>
           <div class="stat-divider">/</div>
@@ -68,7 +68,7 @@ if(profileInformation.value?.reading_goal)
         </div>
 
         <v-progress-linear
-          :model-value="getProgress"
+          :model-value="getProgress ?? 0"
           :height="12"
           :max="readingGoal"
           rounded
@@ -77,7 +77,7 @@ if(profileInformation.value?.reading_goal)
         ></v-progress-linear>
 
         <p class="progress-percentage">
-          {{ readingGoal > 0 ? Math.round((getProgress / readingGoal) * 100) : 0 }}% Complete
+          {{ readingGoal > 0 ? Math.round(((getProgress ?? 0) / readingGoal) * 100) : 0 }}% Complete
         </p>
       </div>
        <ButtonComponent
