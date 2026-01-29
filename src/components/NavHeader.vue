@@ -34,13 +34,16 @@ async function handleSignOut() {
 .header {
   background-color: var(--color-card-bg);
   border-bottom: 1px solid var(--color-border);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   padding-top: var(--safe-area-top);
 }
 
 .header__container {
+
   padding: 0 1rem;
   height: 56px;
   display: flex;
