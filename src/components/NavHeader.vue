@@ -40,6 +40,7 @@ async function handleSignOut() {
   right: 0;
   z-index: 100;
   padding-top: var(--safe-area-top);
+  box-shadow: 0px 0px 10px -2px var(--color-primary);
 }
 
 .header__container {
