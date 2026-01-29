@@ -33,12 +33,9 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
   border-top: 1px solid var(--color-border);
   bottom: 0;
   left: 0;
-  right: 0;
-  width: 100vw;
-  margin: 0;
-  padding-bottom: max(var(--safe-area-bottom), env(safe-area-inset-bottom, 0px));
+  width: 100%;
+  padding-bottom: var(--safe-area-bottom);
   box-shadow: 0px 0px 10px -4px;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
 }
 
 .footer-nav {
@@ -60,13 +57,9 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
   border-radius: 0.5rem;
 }
 
-.footer-nav-item:focus {
-  outline: none;
-}
-
+.footer-nav-item:focus,
 .footer-nav-item:focus-visible {
   outline: none;
-  background-color: rgba(var(--color-primary-rgb, 99, 102, 241), 0.15);
 }
 
 .footer-nav-item:active {
