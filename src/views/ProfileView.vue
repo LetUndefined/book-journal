@@ -19,8 +19,7 @@ const { fetchData } = supaStore
 const enteredValue = ref(0)
 
 const getProgress = computed(() => {
-  const getTotal = libraryBooks.value?.filter((e) => e.status === 'Completed')
-  return getTotal?.length
+return libraryBooks.value?.filter((e) => e.status === 'Completed').length
 })
 
 const saveChange = async () => {
@@ -103,6 +102,8 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-top: 4rem;
+
 }
 
 .profile-header {

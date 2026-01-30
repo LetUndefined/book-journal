@@ -70,7 +70,9 @@ onUnmounted(() => {
     </div>
 
     <div class="home">
-      <SearchBar />
+      <div class="search-container">
+        <SearchBar class="search-bar"/>
+      </div>
       <section class="book-list">
         <div v-if="books.length === 0 && !noBook && !isLoading" class="empty-state">
           <p>
@@ -98,7 +100,14 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-top: 4rem;
 }
+
+.search-container{
+  display: flex;
+  justify-content: center;
+}
+
 
 .book-list {
   flex: 1;
@@ -106,6 +115,7 @@ onUnmounted(() => {
   overflow-y: auto;
   position: relative;
   margin-top: 5rem;
+  margin-bottom: 1rem;
 }
 
 .loading {

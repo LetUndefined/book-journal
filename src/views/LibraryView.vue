@@ -55,6 +55,8 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  margin-top: 4rem;
+
 }
 
 .book-list {
@@ -62,6 +64,7 @@ onMounted(async () => {
   padding: 0 1rem 2rem;
   overflow-y: auto;
   position: relative;
-  margin-top: 3rem;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
 }
 </style>

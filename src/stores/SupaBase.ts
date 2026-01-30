@@ -99,7 +99,7 @@ export const useSupaStore = defineStore('supebase', () => {
       bookStatus.value = singleBook.status
       localrating.value = singleBook.rating
       pepperRating.value = singleBook.pepper
-      selectedYear.value = singleBook.year_read
+      selectedYear.value = Number(singleBook.year_read) || 2026
     }
   }
 

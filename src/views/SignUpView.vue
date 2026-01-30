@@ -44,6 +44,7 @@ async function handleSignUp() {
         </div>
 
         <button type="submit" class="btn-primary">Sign Up</button>
+        <button type="submit" class="btn-secondary" @click="router.go(-1)">Go Back</button>
       </form>
     </div>
   </div>
@@ -106,6 +107,7 @@ input {
   border-radius: var(--radius-md);
   font-size: 1rem;
   transition: border-color 0.3s;
+  color: var(--color-text);
 }
 
 input:focus {

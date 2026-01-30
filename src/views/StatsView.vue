@@ -76,6 +76,7 @@ onMounted(async () => {
   flex-direction: column;
   gap: 2rem;
   overflow-y: auto;
+  margin-top: 4rem;
 }
 
 .stats-information {

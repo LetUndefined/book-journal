@@ -41,7 +41,7 @@ const handleEmit = (index: number, filter: string) => {
   padding: 0.5rem;
   position: fixed;
   z-index: 4;
-  box-shadow: 0px 0px 10px -2px;
+  box-shadow: 0px 0px 6px -2px #ffffff;
   width: calc(100% - 2rem);
 }
 

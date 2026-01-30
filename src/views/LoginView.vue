@@ -106,6 +106,8 @@ input {
   border-radius: var(--radius-md);
   font-size: 1rem;
   transition: border-color 0.3s;
+  color: var(--color-text);
+
 }
 
 input:focus {
