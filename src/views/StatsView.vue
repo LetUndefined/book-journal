@@ -39,14 +39,14 @@ onMounted( async () => {
         <div class="star-rating">
           <span>{{ totalStar }}</span>
           <div class="icon">
-            <font-awesome-icon v-for="n in Math.round(totalStar)" :key="n" icon="star" style="color: gold" />
+            <font-awesome-icon v-for="n in Math.floor(totalStar)" :key="n" icon="star" style="color: gold" />
           </div>
           <span>Star Rating</span>
         </div>
         <div class="pepper-rating">
           <span>{{ totalPepper }}</span>
           <div class="icon">
-            <span v-for="n in Math.round(totalPepper)" :key="n">🌶️</span>
+            <span v-for="n in Math.floor(totalPepper)" :key="n">🌶️</span>
           </div>
           <span>Pepper Rating</span>
         </div>
