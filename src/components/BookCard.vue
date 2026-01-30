@@ -48,10 +48,11 @@ const handleClick = () => {
   background: var(--color-card-bg);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
   box-shadow: 0px 2px 5px -2px;
+
 }
 
 .book-card:active {
@@ -89,7 +90,9 @@ const handleClick = () => {
   position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
-  background: var(--color-accent);
+  background: linear-gradient(to bottom right, var(--color-card-bg), var(--color-secondary));
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgb(124, 124, 124);
   color: rgb(0, 0, 0);
   font-size: 0.6rem;
   font-weight: 600;
