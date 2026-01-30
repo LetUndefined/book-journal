@@ -36,13 +36,13 @@ const handleEmit = (index: number, filter: string) => {
   overflow-x: auto;
   scrollbar-width: none;
   padding-bottom: 2px;
-  border-radius: 20px ;
+  border-radius: 20px;
   background-color: var(--color-card-bg);
   padding: 0.5rem;
   position: fixed;
   z-index: 4;
-  box-shadow: 0px 0px 10px -2px ;
-  width: calc(100% - 2rem)
+  box-shadow: 0px 0px 10px -2px;
+  width: calc(100% - 2rem);
 }
 
 .search-bar-filter {

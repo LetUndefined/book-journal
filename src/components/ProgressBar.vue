@@ -28,7 +28,7 @@ defineProps<{
 </template>
 
 <style scoped>
-.container-content{
+.container-content {
   display: flex;
   align-items: center;
   gap: 1rem;

@@ -2,7 +2,6 @@
 import { useBookStore } from '@/stores/BookLogic'
 import { storeToRefs } from 'pinia'
 
-
 const bookStore = useBookStore()
 const { inputValue, searchType } = storeToRefs(bookStore)
 const { fetchSelectedBook } = bookStore

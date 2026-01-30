@@ -1,23 +1,31 @@
 <script setup lang="ts">
 import StatsInformation from '@/components/StatsInformation.vue'
-import { useSupaStore } from '@/stores/SupaBase';
-import {  onMounted } from 'vue';
-import { totalBooks, totalDnf, totalPepper, totalStar, totalReading } from '@/services/StatsLogic';
-import { totalCompleted } from '@/services/StatsLogic';
+import { useSupaStore } from '@/stores/SupaBase'
+import { onMounted } from 'vue'
+import { totalBooks, totalDnf, totalPepper, totalStar, totalReading } from '@/services/StatsLogic'
+import { totalCompleted } from '@/services/StatsLogic'
+import { storeToRefs } from 'pinia'
 
 const supaStore = useSupaStore()
-const {fetchData} = supaStore
+const { fetchData } = supaStore
+const {selectedYear} = storeToRefs(supaStore)
 
-
-
-onMounted( async () => {
+onMounted(async () => {
   await fetchData()
 })
 </script>
 
 <template>
   <div class="container">
-    <h2>Your stats</h2>
+    <h2>Your stats for</h2>
+     <div class="year-selector">
+          <v-select
+            label="Year"
+            :items="[2024, 2025, 2026]"
+            variant="outlined"
+            v-model="selectedYear"
+          ></v-select>
+        </div>
     <div class="stats-information">
       <div class="information-block">
         <StatsInformation :stat="totalBooks || 0" title="Total books" />
@@ -38,7 +46,12 @@ onMounted( async () => {
         <div class="star-rating">
           <span>{{ totalStar }}</span>
           <div class="icon">
-            <font-awesome-icon v-for="n in Math.floor(totalStar)" :key="n" icon="star" style="color: gold" />
+            <font-awesome-icon
+              v-for="n in Math.floor(totalStar)"
+              :key="n"
+              icon="star"
+              style="color: gold"
+            />
           </div>
           <span>Star Rating</span>
         </div>
@@ -56,14 +69,13 @@ onMounted( async () => {
 
 <style scoped>
 .container {
-padding: 1rem 3rem 1rem;
+  padding: 1rem 3rem 1rem;
   display: flex;
   align-items: center;
   height: 100%;
   flex-direction: column;
   gap: 2rem;
   overflow-y: auto;
-
 }
 
 .stats-information {
@@ -71,7 +83,6 @@ padding: 1rem 3rem 1rem;
   justify-content: space-between;
   gap: 1.5rem;
   flex-wrap: wrap;
-
 }
 
 .rating-container {
@@ -85,7 +96,6 @@ padding: 1rem 3rem 1rem;
   justify-content: center;
   gap: 1rem;
   background-color: var(--color-card-bg);
-
 }
 
 .ratings {
@@ -100,5 +110,4 @@ padding: 1rem 3rem 1rem;
   flex-direction: column;
   align-items: center;
 }
-
 </style>

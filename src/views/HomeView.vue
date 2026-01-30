@@ -92,8 +92,7 @@ onUnmounted(() => {
 <style scoped>
 .book-modal {
   position: fixed;
-  z-index: 9999;
-  height: 100vh;
+  z-index: 999;
 }
 .home {
   display: flex;

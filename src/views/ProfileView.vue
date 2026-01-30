@@ -10,18 +10,13 @@ import { computed, onMounted, ref } from 'vue'
 
 const authStore = useAuthStore()
 const { profileInformation, readingGoal } = storeToRefs(authStore)
-const {saveProfile} = authStore
-
+const { saveProfile } = authStore
 
 const supaStore = useSupaStore()
-const {libraryBooks, modalTriggerComponent} = storeToRefs(supaStore)
-const {fetchData} = supaStore
+const { libraryBooks, modalTriggerComponent } = storeToRefs(supaStore)
+const { fetchData } = supaStore
 
 const enteredValue = ref(0)
-
-
-
-
 
 const getProgress = computed(() => {
   const getTotal = libraryBooks.value?.filter((e) => e.status === 'Completed')
@@ -38,17 +33,17 @@ const handleModalClose = () => {
   modalTriggerComponent.value = false
 }
 
-onMounted( async() => {
-await fetchData()
-if(profileInformation.value?.reading_goal)
-  readingGoal.value = profileInformation.value.reading_goal!
+onMounted(async () => {
+  await fetchData()
+  if (profileInformation.value?.reading_goal)
+    readingGoal.value = profileInformation.value.reading_goal!
 })
 </script>
 
 <template>
   <ModalComponent v-if="modalTriggerComponent" @close="handleModalClose">
     <label for="number">Enter Goal</label>
-    <input type="number" id="number" placeholder="Enter Goal" v-model="enteredValue">
+    <input type="number" id="number" placeholder="Enter Goal" v-model="enteredValue" />
     <div class="btn">
       <button class="submit" @click="saveChange()">Edit Goal</button>
     </div>
@@ -93,16 +88,12 @@ if(profileInformation.value?.reading_goal)
           {{ readingGoal > 0 ? Math.round(((getProgress ?? 0) / readingGoal) * 100) : 0 }}% Complete
         </p>
       </div>
-       <ButtonComponent
-          :prepend-icon="faPenToSquare"
-          @open-modal="modalTriggerComponent = true"
-        >
-          Edit Goal
-        </ButtonComponent>
+      <ButtonComponent :prepend-icon="faPenToSquare" @open-modal="modalTriggerComponent = true">
+        Edit Goal
+      </ButtonComponent>
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .profile-container {
@@ -235,7 +226,7 @@ label {
   margin-bottom: -0.5rem;
 }
 
-input[type="number"] {
+input[type='number'] {
   width: 100%;
   max-width: 300px;
   padding: 0.75rem 1rem;
@@ -247,14 +238,14 @@ input[type="number"] {
   transition: all 0.2s ease;
 }
 
-input[type="number"]:focus {
+input[type='number']:focus {
   outline: none;
   border-color: var(--color-secondary);
   background-color: rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 0 3px rgba(var(--color-secondary-rgb, 255, 255, 255), 0.1);
 }
 
-input[type="number"]::placeholder {
+input[type='number']::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 

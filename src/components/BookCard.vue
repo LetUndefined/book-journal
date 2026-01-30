@@ -52,7 +52,6 @@ const handleClick = () => {
   display: flex;
   flex-direction: column;
   box-shadow: 0px 2px 5px -2px;
-
 }
 
 .book-card:active {

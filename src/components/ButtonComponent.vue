@@ -6,22 +6,16 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-
   (e: 'openModal'): void
-
 }>()
-
 </script>
-
-
 
 <template>
   <div class="text-center">
     <v-btn @click="emit('openModal')" rounded="xl">
-     <font-awesome-icon :icon="prependIcon" />
+      <font-awesome-icon :icon="prependIcon" />
 
       <slot></slot>
-
     </v-btn>
   </div>
 </template>

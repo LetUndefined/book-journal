@@ -14,7 +14,6 @@ export const useAuthStore = defineStore('authenticator', () => {
   const profileInformation: Ref<Profile | null> = ref(null)
   const readingGoal = ref(0)
 
-
   // Check if someone is logged in
   async function initAuth() {
     const {
@@ -73,14 +72,13 @@ export const useAuthStore = defineStore('authenticator', () => {
     return data
   }
 
-
   async function saveProfile() {
-    const {error} = await supabase
-    .from('user_profiles')
-    .update({'reading_goal': readingGoal.value})
-    .eq('user_id', user.value?.id)
+    const { error } = await supabase
+      .from('user_profiles')
+      .update({ reading_goal: readingGoal.value })
+      .eq('user_id', user.value?.id)
 
-    if(error){
+    if (error) {
       throw error
     }
   }
@@ -98,6 +96,6 @@ export const useAuthStore = defineStore('authenticator', () => {
     profileInformation,
     loadProfile,
     readingGoal,
-    saveProfile
+    saveProfile,
   }
 })

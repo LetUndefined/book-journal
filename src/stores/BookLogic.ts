@@ -15,7 +15,9 @@ export const useBookStore = defineStore('books', () => {
     noBook.value = false
     isLoading.value = true
     try {
-      const response = await fetch(`https://openlibrary.org/search.json?${searchType.value}=${inputValue}&limit=20`)
+      const response = await fetch(
+        `https://openlibrary.org/search.json?${searchType.value}=${inputValue}&limit=20`,
+      )
       const data = await response.json()
 
       if (data.docs && data.docs.length > 0) {

@@ -7,8 +7,15 @@ import ModalComponent from './ModalComponent.vue'
 
 const supaStore = useSupaStore()
 const { insertData, removeData, updateData } = supaStore
-const { libraryBooks, selectedBook, modalTrigger, bookStatus, localrating, pepperRating } =
-  storeToRefs(supaStore)
+const {
+  libraryBooks,
+  selectedBook,
+  modalTrigger,
+  bookStatus,
+  localrating,
+  pepperRating,
+  selectedYear,
+} = storeToRefs(supaStore)
 
 defineProps<{
   book: Book
@@ -84,6 +91,18 @@ async function handleBookUpdate() {
         <label class="section-label">Status</label>
         <div class="chips">
           <BookChips :chip="bookStatus" @save-status="setStatus" />
+        </div>
+      </div>
+
+      <div class="section">
+        <label class="section-label">Reading Year</label>
+        <div class="year-selector">
+          <v-select
+            label="Year"
+            :items="[2024, 2025, 2026]"
+            variant="outlined"
+            v-model="selectedYear"
+          ></v-select>
         </div>
       </div>
 
@@ -166,7 +185,7 @@ async function handleBookUpdate() {
 .section {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
@@ -184,6 +203,20 @@ async function handleBookUpdate() {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.search-type-select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-card-bg);
+  color: var(--color-text);
+  width: 100%;
+}
+
+
 
 .rating {
   display: flex;

@@ -12,8 +12,8 @@ export const useSupaStore = defineStore('supebase', () => {
   const localrating = ref(0.5)
   const pepperRating = ref(1)
   const filteredBooks: Ref<Book[] | null> = ref(null)
-const modalTriggerComponent = ref(false)
-
+  const modalTriggerComponent = ref(false)
+  const selectedYear = ref(2026)
 
   // change status format for database (add underscore)
   function convertStatusToDb(status: string): string {
@@ -49,6 +49,7 @@ const modalTriggerComponent = ref(false)
       status: convertStatusToDb(bookStatus.value),
       rating: localrating.value,
       pepper: pepperRating.value,
+      year_read: selectedYear.value
     }
     console.log('Book data being sent:', bookData)
     const { data, error } = await supabase.from('user_books').insert(bookData).select()
@@ -81,6 +82,7 @@ const modalTriggerComponent = ref(false)
           cover: e.cover && !e.cover.includes('src/assets') ? e.cover : NoCover,
           rating: e.rating,
           pepper: e.pepper,
+          year_read: e.year_read
         }
         return book
       })
@@ -97,6 +99,7 @@ const modalTriggerComponent = ref(false)
       bookStatus.value = singleBook.status
       localrating.value = singleBook.rating
       pepperRating.value = singleBook.pepper
+      selectedYear.value = singleBook.year_read
     }
   }
 
@@ -119,6 +122,7 @@ const modalTriggerComponent = ref(false)
         status: convertStatusToDb(bookStatus.value),
         rating: localrating.value,
         pepper: pepperRating.value,
+        year_read: selectedYear.value
       })
       .eq('book_id', selectedBook.value?.book_id)
     await fetchData()
@@ -155,6 +159,7 @@ const modalTriggerComponent = ref(false)
     loadBook,
     filterLibraryBooks,
     filteredBooks,
-    modalTriggerComponent
+    modalTriggerComponent,
+    selectedYear,
   }
 })

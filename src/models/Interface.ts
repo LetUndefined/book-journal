@@ -6,6 +6,7 @@ export interface Book {
   cover?: string
   rating: number
   pepper: number
+  year_read: number
 }
 
 export interface BookDetails {

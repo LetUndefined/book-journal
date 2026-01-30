@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { onMounted, ref } from 'vue'
 
-
 const router = useRouter()
 const isDarkMode = ref(false)
 
@@ -16,8 +15,6 @@ async function handleSignOut() {
   await signOut()
   router.push({ name: 'login' })
 }
-
-
 
 const toggleDarkMode = () => {
   isDarkMode.value = !isDarkMode.value
@@ -50,7 +47,11 @@ onMounted(() => {
         <h1 class="header__title">Book Journal</h1>
       </div>
       <div class="logout">
-        <font-awesome-icon :icon="isDarkMode ? faSun : faMoon" @click="toggleDarkMode()"  class="dark-mode-toggle"/>
+        <font-awesome-icon
+          :icon="isDarkMode ? faSun : faMoon"
+          @click="toggleDarkMode()"
+          class="dark-mode-toggle"
+        />
         <font-awesome-icon :icon="faArrowRightFromBracket" @click="handleSignOut()" />
       </div>
     </div>
@@ -71,7 +72,6 @@ onMounted(() => {
 }
 
 .header__container {
-
   padding: 0 1rem;
   height: 56px;
   display: flex;
@@ -156,7 +156,7 @@ onMounted(() => {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
 }
 
-.logout{
+.logout {
   display: flex;
   gap: 1rem;
 }

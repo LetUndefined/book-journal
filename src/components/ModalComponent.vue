@@ -17,9 +17,7 @@ function handleClose() {
   </div>
 </template>
 
-
 <style scoped>
-
 .modal-container {
   position: fixed;
   top: 0;
@@ -101,7 +99,7 @@ label {
   margin-bottom: -0.5rem;
 }
 
-input[type="number"] {
+input[type='number'] {
   width: 100%;
   max-width: 300px;
   padding: 0.75rem 1rem;
@@ -113,14 +111,14 @@ input[type="number"] {
   transition: all 0.2s ease;
 }
 
-input[type="number"]:focus {
+input[type='number']:focus {
   outline: none;
   border-color: var(--color-secondary);
   background-color: rgba(255, 255, 255, 0.15);
   box-shadow: 0 0 0 3px rgba(var(--color-secondary-rgb, 255, 255, 255), 0.1);
 }
 
-input[type="number"]::placeholder {
+input[type='number']::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
@@ -143,7 +141,4 @@ input[type="number"]::placeholder {
   transition: all 0.2s ease;
   font-size: 0.95rem;
 }
-
-
-
 </style>
