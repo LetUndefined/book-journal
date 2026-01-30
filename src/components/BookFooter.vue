@@ -87,7 +87,8 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
   font-weight: 900;
 }
 
-.router-link-exact-active {
+.router-link-exact-active
+{
   color: var(--color-primary);
   background-color: rgba(var(--color-primary-rgb, 99, 102, 241), 0.1);
 }

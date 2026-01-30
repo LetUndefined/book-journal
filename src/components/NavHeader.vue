@@ -2,8 +2,12 @@
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useAuthStore } from '@/stores/Auth'
 import { useRouter } from 'vue-router'
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
+import { onMounted, ref } from 'vue'
+
 
 const router = useRouter()
+const isDarkMode = ref(false)
 
 const authStore = useAuthStore()
 const { signOut } = authStore
@@ -12,6 +16,28 @@ async function handleSignOut() {
   await signOut()
   router.push({ name: 'login' })
 }
+
+
+
+const toggleDarkMode = () => {
+  isDarkMode.value = !isDarkMode.value
+
+  if (isDarkMode.value) {
+    document.body.classList.add('dark-mode')
+  } else {
+    document.body.classList.remove('dark-mode')
+  }
+
+  localStorage.setItem('darkMode', String(isDarkMode.value))
+}
+
+onMounted(() => {
+  const saved = localStorage.getItem('darkMode')
+  isDarkMode.value = saved === 'true'
+  if (isDarkMode.value) {
+    document.body.classList.add('dark-mode')
+  }
+})
 </script>
 
 <template>
@@ -24,6 +50,7 @@ async function handleSignOut() {
         <h1 class="header__title">Book Journal</h1>
       </div>
       <div class="logout">
+        <font-awesome-icon :icon="isDarkMode ? faSun : faMoon" @click="toggleDarkMode()"  class="dark-mode-toggle"/>
         <font-awesome-icon :icon="faArrowRightFromBracket" @click="handleSignOut()" />
       </div>
     </div>
@@ -127,5 +154,14 @@ async function handleSignOut() {
 .header__btn--primary:active {
   transform: scale(0.95);
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+}
+
+.logout{
+  display: flex;
+  gap: 1rem;
+}
+
+.dark-mode-toggle:active {
+  transform: scale(0.9);
 }
 </style>

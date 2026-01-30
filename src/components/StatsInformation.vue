@@ -17,12 +17,12 @@ defineProps<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 10px -2px black;
+  box-shadow: var(--shadow-lg);
   border-radius: 10px;
   width: 9rem;
   height: 9rem;
   justify-content: center;
-  background: linear-gradient(to bottom right, var(--color-card-bg), var(--color-secondary));
+  background-color: var(--color-card-bg);
 }
 
 .block-container h3{

@@ -13,6 +13,7 @@ import {
   faArrowRightFromBracket,
   faPenToSquare,
   faStar,
+  faMoon,
 } from '@fortawesome/free-solid-svg-icons'
 import StarRating from 'vue-star-rating'
 
@@ -23,7 +24,7 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
 
-library.add(faBookOpen, faArrowRightFromBracket, faPenToSquare, faStar)
+library.add(faBookOpen, faArrowRightFromBracket, faPenToSquare, faStar, faMoon)
 
 const vuetify = createVuetify({
   components,

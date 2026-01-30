@@ -35,6 +35,15 @@
   --safe-area-bottom: env(safe-area-inset-bottom);
 }
 
+.dark-mode {
+  --color-primary: #a693c4;
+  --color-secondary: #1a1625;
+  --color-text: #e8e3f0;
+  --color-text-muted: #a693c4;
+  --color-border: #3d2f52;
+  --color-card-bg: #2a1f3d;
+}
+
 html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;

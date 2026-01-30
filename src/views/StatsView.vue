@@ -78,13 +78,14 @@ padding: 1rem 3rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 10px -2px black;
+  box-shadow: var(--shadow-lg);
   border-radius: 10px;
   width: 100%;
   padding: 2rem;
   justify-content: center;
   gap: 1rem;
-  background: linear-gradient(to bottom right, var(--color-card-bg), var(--color-secondary));
+  background-color: var(--color-card-bg);
+
 }
 
 .ratings {
