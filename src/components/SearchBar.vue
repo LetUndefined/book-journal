@@ -44,6 +44,8 @@ const getSelectedBook = (value: string) => {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  position: fixed;
+  z-index: 4;
 }
 
 .search-bar-input-wrapper {

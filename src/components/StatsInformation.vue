@@ -22,10 +22,12 @@ defineProps<{
   width: 9rem;
   height: 9rem;
   justify-content: center;
-  background-color: var(--color-card-bg);
+  background: linear-gradient(to bottom right, var(--color-card-bg), var(--color-secondary));
 }
 
 .block-container h3{
   font-size: 24px;
 }
+
+
 </style>

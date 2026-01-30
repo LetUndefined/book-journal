@@ -35,8 +35,14 @@ const handleEmit = (index: number, filter: string) => {
   gap: 0.5rem;
   overflow-x: auto;
   scrollbar-width: none;
-  -ms-overflow-style: none;
   padding-bottom: 2px;
+  border-radius: 20px ;
+  background-color: var(--color-card-bg);
+  padding: 0.5rem;
+  position: fixed;
+  z-index: 4;
+  box-shadow: 0px 0px 10px -2px ;
+  width: calc(100% - 2rem)
 }
 
 .search-bar-filter {
@@ -50,7 +56,6 @@ const handleEmit = (index: number, filter: string) => {
   color: var(--color-text-muted);
   cursor: pointer;
   white-space: nowrap;
-  flex-shrink: 0;
   transition: all var(--transition-fast);
 }
 

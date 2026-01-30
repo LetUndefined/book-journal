@@ -63,6 +63,7 @@ padding: 1rem 3rem 1rem;
   flex-direction: column;
   gap: 2rem;
   overflow-y: auto;
+
 }
 
 .stats-information {
@@ -70,6 +71,7 @@ padding: 1rem 3rem 1rem;
   justify-content: space-between;
   gap: 1.5rem;
   flex-wrap: wrap;
+
 }
 
 .rating-container {
@@ -82,8 +84,7 @@ padding: 1rem 3rem 1rem;
   padding: 2rem;
   justify-content: center;
   gap: 1rem;
-  background-color: var(--color-card-bg);
-
+  background: linear-gradient(to bottom right, var(--color-card-bg), var(--color-secondary));
 }
 
 .ratings {

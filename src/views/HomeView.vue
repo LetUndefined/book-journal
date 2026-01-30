@@ -106,10 +106,19 @@ onUnmounted(() => {
   padding: 0 1rem 2rem;
   overflow-y: auto;
   position: relative;
+  margin-top: 5rem;
 }
 
 .loading {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .empty-state {

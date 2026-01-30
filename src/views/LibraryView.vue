@@ -62,5 +62,6 @@ onMounted(async () => {
   padding: 0 1rem 2rem;
   overflow-y: auto;
   position: relative;
+  margin-top: 3rem;
 }
 </style>
