@@ -2,8 +2,9 @@
 import { useBookStore } from '@/stores/BookLogic'
 import { storeToRefs } from 'pinia'
 
+
 const bookStore = useBookStore()
-const { inputValue } = storeToRefs(bookStore)
+const { inputValue, searchType } = storeToRefs(bookStore)
 const { fetchSelectedBook } = bookStore
 
 const getSelectedBook = (value: string) => {
@@ -15,10 +16,14 @@ const getSelectedBook = (value: string) => {
 <template>
   <div class="search-bar-container">
     <div class="search-bar-input-wrapper">
+      <select v-model="searchType" class="search-type-select">
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+      </select>
       <input
         type="text"
         class="search-bar-input"
-        placeholder="Search books..."
+        :placeholder="`Search by ${searchType}...`"
         v-model="inputValue"
         @keyup.enter="getSelectedBook(inputValue)"
       />
@@ -51,6 +56,21 @@ const getSelectedBook = (value: string) => {
   padding: 0 1rem;
   transition: all var(--transition-normal);
   box-shadow: 0px 0px 10px -5px;
+  gap: 0.5rem;
+}
+
+.search-type-select {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-card-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
 }
 
 .search-bar__icon {

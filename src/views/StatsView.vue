@@ -61,8 +61,7 @@ onMounted( async () => {
 
 <style scoped>
 .container {
-
-margin: 1rem 3rem;
+padding: 1rem 3rem 1rem;
   display: flex;
   align-items: center;
   height: 100%;
@@ -82,12 +81,14 @@ margin: 1rem 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0px 0px 10px -5px black;
+  box-shadow: 0px 0px 10px -2px black;
   border-radius: 10px;
   width: 100%;
   padding: 2rem;
   justify-content: center;
   gap: 1rem;
+  background-color: var(--color-card-bg);
+
 }
 
 .ratings {
@@ -107,9 +108,11 @@ margin: 1rem 3rem;
   display: flex;
   width: 100%;
   flex-direction: column;
-  box-shadow: 0px 0px 10px -5px black;
+  box-shadow: 0px 0px 10px -2px black;
   border-radius: 10px;
   padding: 2rem;
   gap: 1rem;
+  background-color: var(--color-card-bg);
+
 }
 </style>

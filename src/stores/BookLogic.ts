@@ -5,6 +5,7 @@ import NoCover from '@/assets/No_cover.png'
 
 export const useBookStore = defineStore('books', () => {
   const inputValue = ref('')
+  const searchType = ref('title')
   // const url = 'https://openlibrary.org/search.json?q=subject:'
   const books: Ref<Book[]> = ref([])
   const isLoading = ref(false)
@@ -14,7 +15,7 @@ export const useBookStore = defineStore('books', () => {
     noBook.value = false
     isLoading.value = true
     try {
-      const response = await fetch(`https://openlibrary.org/search.json?q=${inputValue}&limit=20`)
+      const response = await fetch(`https://openlibrary.org/search.json?${searchType.value}=${inputValue}&limit=20`)
       const data = await response.json()
 
       if (data.docs && data.docs.length > 0) {
@@ -51,5 +52,5 @@ export const useBookStore = defineStore('books', () => {
       })
   }
 
-  return { books, inputValue, fetchSelectedBook, isLoading, noBook }
+  return { books, inputValue, searchType, fetchSelectedBook, isLoading, noBook }
 })
