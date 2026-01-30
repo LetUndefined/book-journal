@@ -6,7 +6,7 @@ import { useAuthStore } from '@/stores/Auth'
 import { useSupaStore } from '@/stores/SupaBase'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { storeToRefs } from 'pinia'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const authStore = useAuthStore()
 const { profileInformation, readingGoal } = storeToRefs(authStore)
@@ -16,6 +16,8 @@ const {saveProfile} = authStore
 const supaStore = useSupaStore()
 const {libraryBooks, modalTriggerComponent} = storeToRefs(supaStore)
 const {fetchData} = supaStore
+
+const enteredValue = ref(0)
 
 
 
@@ -27,8 +29,13 @@ const getProgress = computed(() => {
 })
 
 const saveChange = async () => {
+  readingGoal.value = enteredValue.value
   modalTriggerComponent.value = false
   await saveProfile()
+}
+
+const handleModalClose = () => {
+  modalTriggerComponent.value = false
 }
 
 onMounted( async() => {
@@ -39,7 +46,13 @@ if(profileInformation.value?.reading_goal)
 </script>
 
 <template>
-  <ModalComponent v-if="modalTriggerComponent" @save-change="saveChange"/>
+  <ModalComponent v-if="modalTriggerComponent" @close="handleModalClose">
+    <label for="number">Enter Goal</label>
+    <input type="number" id="number" placeholder="Enter Goal" v-model="enteredValue">
+    <div class="btn">
+      <button class="submit" @click="saveChange()">Edit Goal</button>
+    </div>
+  </ModalComponent>
 
   <div class="profile-container">
     <div class="profile-header">
@@ -216,5 +229,52 @@ if(profileInformation.value?.reading_goal)
   font-weight: 500;
 }
 
+label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: -0.5rem;
+}
 
+input[type="number"] {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(var(--color-secondary-rgb, 255, 255, 255), 0.1);
+}
+
+input[type="number"]::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.btn > * {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  background-color: var(--color-secondary);
+  color: black;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
 </style>

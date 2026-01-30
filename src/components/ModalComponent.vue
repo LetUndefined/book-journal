@@ -1,49 +1,20 @@
 <script setup lang="ts">
-import { useSupaStore } from '@/stores/SupaBase';
-import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
-import { useAuthStore } from '@/stores/Auth';
-
 const emit = defineEmits<{
-  (e: 'saveChange', enteredValue: number):void
+  (e: 'close'): void
 }>()
 
-const supaStore = useSupaStore()
-const {modalTriggerComponent } = storeToRefs(supaStore)
-
-const authStore = useAuthStore()
-const {readingGoal} = storeToRefs(authStore)
-
-const enteredValue = ref(0)
-
-
 function handleClose() {
-  modalTriggerComponent.value = false
+  emit('close')
 }
-
-
-function handleEdit() {
-readingGoal.value = enteredValue.value
-emit('saveChange', enteredValue.value)
-
-}
-
 </script>
 
-
 <template>
-
   <div class="modal-container" @click="handleClose()">
     <div class="modal-content" @click.stop>
       <span class="close" @click="handleClose()">X</span>
-      <label for="number">Enter Goal</label>
-      <input type="number" id="number" placeholder="Enter Goal" v-model="enteredValue">
-      <div class="btn">
-        <button class="submit" @click="handleEdit()">Edit Goal</button>
-        </div>
+      <slot></slot>
     </div>
   </div>
-
 </template>
 
 

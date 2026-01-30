@@ -3,6 +3,7 @@ import type { Book } from '@/models/Interface'
 import { useSupaStore } from '@/stores/SupaBase'
 import { storeToRefs } from 'pinia'
 import BookChips from './BookChips.vue'
+import ModalComponent from './ModalComponent.vue'
 
 const supaStore = useSupaStore()
 const { insertData, removeData, updateData } = supaStore
@@ -72,23 +73,36 @@ async function handleBookUpdate() {
 </script>
 
 <template>
-  <div class="modal-container" @click="handleClose">
-    <div class="modal-content" @click.stop>
-      <span class="close" @click="handleClose">X</span>
-      <p>Title: {{ book.title }}</p>
-      <p>Author: {{ book.author }}</p>
-      <div class="chips">
-        <BookChips :chip="bookStatus" @save-status="setStatus" />
+  <ModalComponent @close="handleClose">
+    <div class="book-details">
+      <div class="book-header">
+        <h2 class="book-title">{{ book.title }}</h2>
+        <p class="book-author">by {{ book.author }}</p>
       </div>
-      <div class="rating">
-        <star-rating
-          v-model="localrating"
-          :rating="localrating"
-          :increment="0.5"
-          :show-rating="false"
-          :star-size="35"
-          @update:rating="setRating"
-        />
+
+      <div class="section">
+        <label class="section-label">Status</label>
+        <div class="chips">
+          <BookChips :chip="bookStatus" @save-status="setStatus" />
+        </div>
+      </div>
+
+      <div class="section">
+        <label class="section-label">Your Rating</label>
+        <div class="rating">
+          <star-rating
+            v-model="localrating"
+            :rating="localrating"
+            :increment="0.5"
+            :show-rating="false"
+            :star-size="35"
+            @update:rating="setRating"
+          />
+        </div>
+      </div>
+
+      <div class="section">
+        <label class="section-label">Spice Level</label>
         <div class="pepper-rating">
           <span
             v-for="n in 5"
@@ -100,76 +114,75 @@ async function handleBookUpdate() {
           >
         </div>
       </div>
+
       <div class="btn">
         <button class="submit" v-if="!inLibrary" @click="handleAddBook()">Add To Library</button>
         <button class="update" v-if="inLibrary" @click="handleBookUpdate()">
-          Update information
+          Update Information
         </button>
         <button
           v-if="selectedBook?.book_id && checkBook(selectedBook?.book_id)"
           class="remove"
           @click="handleRemoveBook()"
         >
-          Remove From library
+          Remove From Library
         </button>
       </div>
     </div>
-  </div>
+  </ModalComponent>
 </template>
 
 <style scoped>
-.modal-container {
-  display: flex;
-  flex: 1;
-  border-radius: 10px;
-  width: 100vw;
-  height: 100vh;
-  z-index: 9999;
-  background-color: rgba(128, 128, 128, 0.466);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  position: relative;
+.book-details {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-primary);
-  width: 400px;
-  height: 500px;
-  border-radius: 10px;
+  gap: 2rem;
+  width: 100%;
+  max-width: 450px;
+  padding: 0.5rem;
+}
+
+.book-header {
+  text-align: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.book-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
   color: #ffffff;
-  gap: 1.5rem;
-  border: 1px solid rgb(255, 255, 255);
+  line-height: 1.3;
 }
 
-.close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 20px;
-  padding: 1rem;
+.book-author {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-style: italic;
 }
 
-.btn {
+.section {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
 }
 
-.btn > * {
-  padding: 0.25rem;
-  border-radius: 10px;
-  background-color: var(--color-secondary);
-  color: black;
+.section-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .chips {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .rating {
@@ -177,6 +190,10 @@ async function handleBookUpdate() {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  width: 100%;
 }
 
 .pepper-rating {
@@ -184,14 +201,84 @@ async function handleBookUpdate() {
   gap: 0.5rem;
   font-size: 35px;
   cursor: pointer;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.pepper-rating:hover {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 .pepper {
   user-select: none;
+  transition: all 0.2s ease;
+  transform: scale(1);
+}
+
+.pepper:hover:not(.inactive) {
+  transform: scale(1.15);
 }
 
 .pepper.inactive {
   filter: grayscale(100%);
-  opacity: 0.4;
+  opacity: 0.3;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn > * {
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  background-color: var(--color-secondary);
+  color: #000000;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn > *:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
+}
+
+.btn > *:active {
+  transform: translateY(0);
+}
+
+.btn .submit {
+  background-color: var(--color-secondary);
+  color: #000000;
+}
+
+.btn .remove {
+  background-color: #ff6b6b;
+  color: #ffffff;
+  border: 1px solid #ff4444;
+}
+
+.btn .remove:hover {
+  background-color: #ff5252;
+}
+
+.btn .update {
+  background-color: var(--color-secondary);
+  color: #000000;
+}
+
+.btn .update:hover {
+  background-color: var(--color-secondary);
 }
 </style>
