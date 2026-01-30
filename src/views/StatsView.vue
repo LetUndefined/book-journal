@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ProgressBar from '@/components/ProgressBar.vue'
 import StatsInformation from '@/components/StatsInformation.vue'
 import { useSupaStore } from '@/stores/SupaBase';
 import {  onMounted } from 'vue';
@@ -52,10 +51,6 @@ onMounted( async () => {
         </div>
       </div>
     </div>
-    <div class="genre-container">
-      <h3>Books by Genre</h3>
-      <ProgressBar title="Fantasy" :total="12" :value="4" />
-    </div>
   </div>
 </template>
 
@@ -104,15 +99,4 @@ padding: 1rem 3rem 1rem;
   align-items: center;
 }
 
-.genre-container {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  box-shadow: 0px 0px 10px -2px black;
-  border-radius: 10px;
-  padding: 2rem;
-  gap: 1rem;
-  background-color: var(--color-card-bg);
-
-}
 </style>

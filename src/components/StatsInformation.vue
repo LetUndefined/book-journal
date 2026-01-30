@@ -24,4 +24,8 @@ defineProps<{
   justify-content: center;
   background-color: var(--color-card-bg);
 }
+
+.block-container h3{
+  font-size: 24px;
+}
 </style>
