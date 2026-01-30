@@ -11,7 +11,7 @@ const props = defineProps<{
   cover?: string
   rating: number
   pepper: number
-  year_read: number
+  year_read?: number
 }>()
 
 const emit = defineEmits<{
@@ -93,7 +93,7 @@ const handleClick = () => {
   background: linear-gradient(to bottom right, var(--color-card-bg), var(--color-secondary));
   box-shadow: var(--shadow-lg);
   border: 1px solid rgb(124, 124, 124);
-  color: rgb(0, 0, 0);
+  color: var(--color-text);
   font-size: 0.6rem;
   font-weight: 600;
   text-transform: uppercase;

@@ -261,7 +261,7 @@ input[type='number']::placeholder {
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   background-color: var(--color-secondary);
-  color: black;
+  color: var(--color-text);
   font-weight: 600;
   border: none;
   cursor: pointer;

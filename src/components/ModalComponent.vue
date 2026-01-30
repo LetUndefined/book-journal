@@ -78,7 +78,7 @@ function handleClose() {
   font-weight: bold;
   padding: 0.5rem;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text);
   transition: all 0.2s ease;
   border-radius: 6px;
   width: 36px;
@@ -93,52 +93,5 @@ function handleClose() {
   color: #ffffff;
 }
 
-label {
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin-bottom: -0.5rem;
-}
 
-input[type='number'] {
-  width: 100%;
-  max-width: 300px;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-}
-
-input[type='number']:focus {
-  outline: none;
-  border-color: var(--color-secondary);
-  background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 0 3px rgba(var(--color-secondary-rgb, 255, 255, 255), 0.1);
-}
-
-input[type='number']::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.btn {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  width: 100%;
-}
-
-.btn > * {
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  background-color: var(--color-secondary);
-  color: black;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.95rem;
-}
 </style>

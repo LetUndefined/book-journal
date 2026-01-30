@@ -204,6 +204,10 @@ async function handleBookUpdate() {
   justify-content: center;
 }
 
+.year-selector {
+  width: 100%;
+}
+
 .search-type-select {
   font-family: var(--font-body);
   font-size: 1rem;
@@ -291,10 +295,6 @@ async function handleBookUpdate() {
   transform: translateY(0);
 }
 
-.btn .submit {
-  background-color: var(--color-secondary);
-  color: #000000;
-}
 
 .btn .remove {
   background-color: #ff6b6b;
@@ -306,9 +306,9 @@ async function handleBookUpdate() {
   background-color: #ff5252;
 }
 
-.btn .update {
+.btn .submit, .btn .update {
   background-color: var(--color-secondary);
-  color: #000000;
+  color: var(--color-text);
 }
 
 .btn .update:hover {
