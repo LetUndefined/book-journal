@@ -49,6 +49,7 @@ export const useBookStore = defineStore('books', () => {
             : NoCover,
           rating: 0,
           pepper: 0,
+          year_read: new Date().getFullYear(),
         }
         return book
       })

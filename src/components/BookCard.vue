@@ -11,6 +11,7 @@ const props = defineProps<{
   cover?: string
   rating: number
   pepper: number
+  year_read: number
 }>()
 
 const emit = defineEmits<{
