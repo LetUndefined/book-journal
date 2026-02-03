@@ -16,15 +16,17 @@
   --color-text-muted: #8b7ba8;
   --color-border: #e4dced;
   --color-card-bg: #faf8fc;
+  --border-color: #28282828;
 
   --gradient-bg: linear-gradient(135deg, #733eb3 0%, #8c3dda 100%);
+  --bg-gradient: linear-gradient(135deg, #faf8fc 0%, #f3ebff 50%, #e8d9ff 100%);
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Outfit', -apple-system, sans-serif;
 
-  --shadow-sm: 0 2px 8px rgba(139, 123, 168, 0.08);
-  --shadow-md: 0 4px 16px rgba(139, 123, 168, 0.12);
-  --shadow-lg: 0 8px 32px rgba(139, 123, 168, 0.40);
+  --shadow-sm: 0 2px 8px rgba(202, 193, 219, 0.08);
+  --shadow-md: 0 4px 16px rgba(145, 140, 155, 0.12);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -42,8 +44,9 @@
   --color-secondary: #1a1625;
   --color-text: #e8e3f0;
   --color-text-muted: #a693c4;
-  --color-border: #3d2f52;
+  --color-border: #808080;
   --color-card-bg: #2a1f3d;
+  --bg-gradient: linear-gradient(135deg, #1a1625 0%, #2a1f3d 50%, #3d2f52 100%);
 }
 
 html {
@@ -56,11 +59,11 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--color-text);
-  background-color: var(--color-secondary);
   line-height: 1.5;
   min-height: 100vh;
   min-height: 100dvh;
   overflow-x: hidden;
+  background: var(--bg-gradient);
 }
 
 #app {

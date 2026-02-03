@@ -29,7 +29,7 @@ import { faHouse, faBook, faChartColumn, faUser } from '@fortawesome/free-solid-
 <style scoped>
 .footer {
   position: fixed;
-  background-color: var(--color-card-bg);
+  background: var(--bg-gradient);
   border-top: 1px solid var(--color-border);
   bottom: 0;
   left: 0;

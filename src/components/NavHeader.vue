@@ -60,7 +60,7 @@ onMounted(() => {
 
 <style scoped>
 .header {
-  background-color: var(--color-card-bg);
+  background: var(--bg-gradient);
   border-bottom: 1px solid var(--color-border);
   position: fixed;
   top: 0;
