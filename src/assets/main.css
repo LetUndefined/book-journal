@@ -7,7 +7,7 @@
 }
 
 :root {
-  --color-primary: #8b7ba8;
+  --color-primary: #b28cfb;
   --color-primary-light: #a693c4;
   --color-secondary: #e4d8f6;
   --color-accent: #c8a8e0;
@@ -17,12 +17,14 @@
   --color-border: #e4dced;
   --color-card-bg: #faf8fc;
 
+  --gradient-bg: linear-gradient(135deg, #733eb3 0%, #8c3dda 100%);
+
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Outfit', -apple-system, sans-serif;
 
   --shadow-sm: 0 2px 8px rgba(139, 123, 168, 0.08);
   --shadow-md: 0 4px 16px rgba(139, 123, 168, 0.12);
-  --shadow-lg: 0 8px 32px rgba(139, 123, 168, 0.16);
+  --shadow-lg: 0 8px 32px rgba(139, 123, 168, 0.40);
 
   --radius-sm: 6px;
   --radius-md: 10px;

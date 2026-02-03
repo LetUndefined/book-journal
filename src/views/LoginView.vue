@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useAuthStore } from '@/stores/Auth'
 import { useRouter } from 'vue-router'
 
+
 const authStore = useAuthStore()
 const { signIn } = authStore
 const router = useRouter()
@@ -55,30 +56,54 @@ async function handleSignIn() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  background: url('@/assets/background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .login-card {
-  background: var(--color-card-bg);
+  background: transparent;
   padding: 2.5rem;
   border-radius: var(--radius-lg);
   box-shadow: 0 10px 40px rgba(45, 74, 62, 0.2);
   width: 100%;
   max-width: 400px;
+  background: rgba(255, 255, 255, 0.167);
+  backdrop-filter: blur(20px);
 }
 
 h1 {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 3.5rem;
+  font-weight: 100;
+  margin-bottom: 1rem;
   text-align: center;
   color: var(--color-primary);
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  font-style: italic;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
 }
 
 .subtitle {
   text-align: center;
   color: var(--color-text-muted);
   margin-bottom: 2rem;
+  text-shadow: 0px 1px 5px black;
+
 }
 
 .login-form {
@@ -96,23 +121,30 @@ h1 {
 
 label {
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-primary);
   font-size: 0.9rem;
 }
 
 input {
-  padding: 0.75rem;
-  border: 2px solid var(--color-border);
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: var(--radius-md);
   font-size: 1rem;
-  transition: border-color 0.3s;
-  color: var(--color-text);
+  transition: all 0.3s;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  font-weight: 500;
+}
 
+input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 input:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary,
@@ -127,7 +159,7 @@ input:focus {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  background: var(--gradient-bg);
   color: white;
 }
 
@@ -143,7 +175,9 @@ input:focus {
 }
 
 .btn-secondary:hover {
-  background: var(--color-secondary);
+  background: var(--color-primary);
+  color: var(--color-secondary  );
+
 }
 
 .divider {
@@ -168,5 +202,6 @@ input:focus {
   position: relative;
   color: var(--color-text-muted);
   font-size: 0.9rem;
+  border-radius: 10px;
 }
 </style>
